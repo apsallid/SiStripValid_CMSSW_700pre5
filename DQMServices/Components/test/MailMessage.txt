@@ -1,0 +1,1 @@
+****************** /afs/cern.ch/work/a/apsallid/CMS/ServiceWork/DELETHISFORSURE/CMSSW_7_0_0_pre5/src/DQMServices/Components/test/3_OK.log
