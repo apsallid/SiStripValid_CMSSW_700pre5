@@ -16,6 +16,7 @@
 #include "FWCore/Framework/interface/Event.h"
 #include "FWCore/Framework/interface/EventSetup.h"
 #include "FWCore/Framework/interface/ESHandle.h"
+#include "FWCore/Utilities/interface/EDGetToken.h"
 //only mine
 #include "DataFormats/Common/interface/Handle.h"
 #include "FWCore/Framework/interface/MakerMacros.h"
@@ -46,10 +47,12 @@
 
 #include <string>
 #include "DQMServices/Core/interface/MonitorElement.h"
+//For RecHit
+#include "DataFormats/TrackerRecHit2D/interface/SiStripRecHit2DCollection.h" 
+#include "DataFormats/TrackerRecHit2D/interface/SiStripMatchedRecHit2DCollection.h" 
 
 class SiStripDetCabling;
 class SiStripDCSStatus;
-class GenericTriggerEventFlag;
 
 class SiStripRecHitsValid : public edm::EDAnalyzer {
 
@@ -116,41 +119,42 @@ class SiStripRecHitsValid : public edm::EDAnalyzer {
 
   TotalMEs totalMEs;
 
-  bool layerswitchNumTotRphi;
-  bool layerswitchNumTotSas;
-  bool layerswitchNumTotMatched;
+  bool switchNumTotRphi;
+  bool switchNumTotSas;
+  bool switchNumTotMatched;
 
 
-  bool layerswitchNumRphi;
-  bool layerswitchNumSas;
-  bool layerswitchNumMatched;
+  bool switchNumRphi;
+  bool switchNumSas;
+  bool switchNumMatched;
 
 
-  bool layerswitchNstpRphi;
-  bool layerswitchAdcRphi;
-  bool layerswitchPosxRphi;
-  bool layerswitchErrxRphi;
-  bool layerswitchResRphi;
-  bool layerswitchPullLFRphi;
-  bool layerswitchPullMFRphi;
-  bool layerswitchChi2Rphi;
-  bool layerswitchNstpSas;
-  bool layerswitchAdcSas;
-  bool layerswitchPosxSas;
-  bool layerswitchErrxSas;
-  bool layerswitchResSas;
-  bool layerswitchPullLFSas;
-  bool layerswitchPullMFSas;
-  bool layerswitchChi2Sas;
-  bool layerswitchPosxMatched;
-  bool layerswitchPosyMatched;
-  bool layerswitchErrxMatched;
-  bool layerswitchErryMatched;
-  bool layerswitchResxMatched;
-  bool layerswitchResyMatched;
-  bool layerswitchChi2Matched;
+  bool switchNstpRphi;
+  bool switchAdcRphi;
+  bool switchPosxRphi;
+  bool switchErrxRphi;
+  bool switchResRphi;
+  bool switchPullLFRphi;
+  bool switchPullMFRphi;
+  bool switchChi2Rphi;
+  bool switchNstpSas;
+  bool switchAdcSas;
+  bool switchPosxSas;
+  bool switchErrxSas;
+  bool switchResSas;
+  bool switchPullLFSas;
+  bool switchPullMFSas;
+  bool switchChi2Sas;
+  bool switchPosxMatched;
+  bool switchPosyMatched;
+  bool switchErrxMatched;
+  bool switchErryMatched;
+  bool switchResxMatched;
+  bool switchResyMatched;
+  bool switchChi2Matched;
   
   std::string topFolderName_;
+  std::vector<std::string> SubDetList_;
   
   std::vector<PSimHit> matched;
   std::map<std::string, LayerMEs> LayerMEsMap;
@@ -214,8 +218,11 @@ class SiStripRecHitsValid : public edm::EDAnalyzer {
   float rechitmatchedresy[MAXHIT];
   float rechitmatchedchi2[MAXHIT];
 
+  //edm::InputTag matchedRecHits_, rphiRecHits_, stereoRecHits_; 
+  edm::EDGetTokenT<SiStripMatchedRecHit2DCollection> matchedRecHitsToken_;
+  edm::EDGetTokenT<SiStripRecHit2DCollection> rphiRecHitsToken_;
+  edm::EDGetTokenT<SiStripRecHit2DCollection> stereoRecHitsToken_;
 
-  edm::InputTag matchedRecHits_, rphiRecHits_, stereoRecHits_;
 };
 
 #endif

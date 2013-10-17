@@ -6,44 +6,44 @@ StripTrackingRecHitsValid = cms.EDAnalyzer("SiStripTrackingRecHitsValid",
     TopFolderName = cms.string('Tracking/TrackingRecHits/'),
 
     TH1Errx_LF = cms.PSet(
-        Nbinx          = cms.int32(100),
+        Nbinx          = cms.int32(1000),
         xmin           = cms.double(0.),
-        xmax           = cms.double(0.005),
+        xmax           = cms.double(0.05),
         layerswitchon  = cms.bool(True)
     ),
 
     TH1Errx_MF = cms.PSet(
-        Nbinx          = cms.int32(100),
+        Nbinx          = cms.int32(1000),
         xmin           = cms.double(0.),
-        xmax           = cms.double(0.5),
+        xmax           = cms.double(5),
         layerswitchon  = cms.bool(True)
     ),
 
     TH1Res_LF = cms.PSet(
-        Nbinx          = cms.int32(100),
-        xmin           = cms.double(-0.02),
-        xmax           = cms.double(+0.02),
+        Nbinx          = cms.int32(1000),
+        xmin           = cms.double(-0.2),
+        xmax           = cms.double(+0.2),
         layerswitchon  = cms.bool(True)
     ),
 
     TH1Res_MF = cms.PSet(
-        Nbinx          = cms.int32(100),
-        xmin           = cms.double(-2.0),
-        xmax           = cms.double(+2.0),
+        Nbinx          = cms.int32(1000),
+        xmin           = cms.double(-20.0),
+        xmax           = cms.double(+20.0),
         layerswitchon  = cms.bool(True)
     ),
 
     TH1Pull_LF = cms.PSet(
-        Nbinx          = cms.int32(100),
-        xmin           = cms.double(-5.0),
-        xmax           = cms.double(+5.0),
+        Nbinx          = cms.int32(1000),
+        xmin           = cms.double(-50.0),
+        xmax           = cms.double(+50.0),
         layerswitchon  = cms.bool(True)
     ),
 
     TH1Pull_MF = cms.PSet(
         Nbinx          = cms.int32(100),
-        xmin           = cms.double(-5.0),
-        xmax           = cms.double(+5.0),
+        xmin           = cms.double(-50.0),
+        xmax           = cms.double(+50.0),
         layerswitchon  = cms.bool(True)
     ),
 
@@ -57,7 +57,7 @@ StripTrackingRecHitsValid = cms.EDAnalyzer("SiStripTrackingRecHitsValid",
     TH1Trackwidth = cms.PSet(
         Nbinx          = cms.int32(100),
         xmin           = cms.double(0.),
-        xmax           = cms.double(4.0),
+        xmax           = cms.double(10.0),
         layerswitchon  = cms.bool(True)
     ),
 
@@ -69,9 +69,9 @@ StripTrackingRecHitsValid = cms.EDAnalyzer("SiStripTrackingRecHitsValid",
     ),
 
     TH1Clusterwidth= cms.PSet(
-        Nbinx          = cms.int32(10),
+        Nbinx          = cms.int32(15),
         xmin           = cms.double(0.),
-        xmax           = cms.double(10.0),
+        xmax           = cms.double(15.0),
         layerswitchon  = cms.bool(True)
     ),
 
@@ -191,7 +191,7 @@ StripTrackingRecHitsValid = cms.EDAnalyzer("SiStripTrackingRecHitsValid",
     TProfErrxMFTrackwidthProfile = cms.PSet(
         Nbinx          = cms.int32(12),
         xmin           = cms.double(0.),
-        xmax           = cms.double(4.0),
+        xmax           = cms.double(10.0),
         ymin           = cms.double(0.),
         ymax           = cms.double(2.0),
         layerswitchon  = cms.bool(True)
@@ -227,7 +227,7 @@ StripTrackingRecHitsValid = cms.EDAnalyzer("SiStripTrackingRecHitsValid",
     TProfErrxMFTrackwidthProfile_Category4 = cms.PSet(
         Nbinx          = cms.int32(12),
         xmin           = cms.double(0.),
-        xmax           = cms.double(4.0),
+        xmax           = cms.double(10.0),
         ymin           = cms.double(-2.0),
         ymax           = cms.double(+2.0),
         layerswitchon  = cms.bool(True)
@@ -244,7 +244,7 @@ StripTrackingRecHitsValid = cms.EDAnalyzer("SiStripTrackingRecHitsValid",
 
     TProfErrxMFAngleProfile = cms.PSet(
         Nbinx          = cms.int32(100),
-        xmin           = cms.double(0.),
+        xmin           = cms.double(-1.),
         xmax           = cms.double(60.0),
         ymin           = cms.double(0.),
         ymax           = cms.double(2.0),
