@@ -10,12 +10,20 @@
 #include "FWCore/Framework/interface/Event.h"
 
 #include "DataFormats/Common/interface/Handle.h"
+#include "FWCore/Utilities/interface/EDGetToken.h"
 
 #include "FWCore/Framework/interface/EventSetup.h"
 
 #include "FWCore/ParameterSet/interface/ParameterSet.h"
+
 #include "DataFormats/TrackingRecHit/interface/TrackingRecHit.h"
 #include "DataFormats/TrajectorySeed/interface/TrajectorySeed.h"
+#include "DataFormats/TrajectorySeed/interface/TrajectorySeedCollection.h"
+#include "DataFormats/TrackReco/interface/Track.h"
+#include "DataFormats/TrackReco/interface/TrackExtra.h"
+#include "DataFormats/GeometryVector/interface/GlobalVector.h"
+#include "DataFormats/GeometryVector/interface/LocalVector.h"
+
 #include "TrackingTools/TrajectoryState/interface/TrajectoryStateOnSurface.h"
 #include "Geometry/TrackerGeometryBuilder/interface/TrackerGeometry.h"
 #include "MagneticField/Records/interface/IdealMagneticFieldRecord.h"
@@ -451,7 +459,8 @@ class SiStripTrackingRecHitsValid : public edm::EDAnalyzer
   float rechitmatchedtrackangle;
 
   float track_rapidity;
-  edm::InputTag trajectoryInput_;
+  //edm::InputTag trajectoryInput_;
+  edm::EDGetTokenT<std::vector<Trajectory> > trajectoryInputToken_;
 
 };
 

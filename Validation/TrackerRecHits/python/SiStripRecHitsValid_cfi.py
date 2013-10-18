@@ -6,7 +6,7 @@ stripRecHitsValid = cms.EDAnalyzer("SiStripRecHitsValid",
     OutputMEsInRootFile = cms.bool(True),
     TopFolderName = cms.string('SiStrip/RecHitsValidation/StiffTrackingRecHits/'),
 
-    TH1NumTotRphi = cms.PSet(
+    TH1NumTotrphi = cms.PSet(
         Nbinx          = cms.int32(100),
         xmin           = cms.double(0.),
         xmax           = cms.double(10000.),
@@ -28,7 +28,7 @@ stripRecHitsValid = cms.EDAnalyzer("SiStripRecHitsValid",
 
     ),
 
-  TH1NumRphi = cms.PSet(
+  TH1Numrphi = cms.PSet(
         Nbinx          = cms.int32(100),
         xmin           = cms.double(0.),
         xmax           = cms.double(1000.),
@@ -52,56 +52,56 @@ stripRecHitsValid = cms.EDAnalyzer("SiStripRecHitsValid",
 
     ),
 
-    TH1NstpRphi = cms.PSet(
+    TH1Nstprphi = cms.PSet(
         Nbinx          = cms.int32(20),
         xmin           = cms.double(-0.5),
         xmax           = cms.double(19.5),
         switchon  = cms.bool(True)
     ),
 
-    TH1AdcRphi = cms.PSet(
+    TH1Adcrphi = cms.PSet(
         Nbinx          = cms.int32(100),
         xmin           = cms.double(0.),
         xmax           = cms.double(500.),#300.
         switchon  = cms.bool(True)
     ),
 
-    TH1PosxRphi = cms.PSet(
+    TH1Posxrphi = cms.PSet(
         Nbinx          = cms.int32(100),
         xmin           = cms.double(-6.0),#-6.0
         xmax           = cms.double(+6.0),#+6.0
         switchon  = cms.bool(True)
     ),
 
-    TH1ErrxRphi = cms.PSet( #<error>~20micron 
+    TH1Errxrphi = cms.PSet( #<error>~20micron 
         Nbinx          = cms.int32(100),
         xmin           = cms.double(0.),
         xmax           = cms.double(0.10),#0.01
         switchon  = cms.bool(True)
     ),
 
-    TH1ResRphi = cms.PSet( 
+    TH1Resrphi = cms.PSet( 
         Nbinx          = cms.int32(100),
         xmin           = cms.double(-0.10),#-0.02
         xmax           = cms.double(+0.10),#+0.02
         switchon  = cms.bool(True)
     ),
 
-    TH1PullLFRphi = cms.PSet( 
+    TH1PullLFrphi = cms.PSet( 
         Nbinx          = cms.int32(100),
         xmin           = cms.double(-10.),#-5.0
         xmax           = cms.double(+10.),#+5.0
         switchon  = cms.bool(True)
     ),
 
-    TH1PullMFRphi = cms.PSet( 
+    TH1PullMFrphi = cms.PSet( 
         Nbinx          = cms.int32(100),
         xmin           = cms.double(-10.),#-5.0
         xmax           = cms.double(+10.),#+5.0
         switchon  = cms.bool(True)
     ),
 
-    TH1Chi2Rphi = cms.PSet( 
+    TH1Chi2rphi = cms.PSet( 
         Nbinx          = cms.int32(100),
         xmin           = cms.double(0.),
         xmax           = cms.double(50.),

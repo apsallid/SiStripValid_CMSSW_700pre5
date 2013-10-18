@@ -63,26 +63,26 @@ class SiStripRecHitsValid : public edm::EDAnalyzer {
   ~SiStripRecHitsValid();
  
   struct TotalMEs{ // MEs for total detector Level
-    MonitorElement*  meNumTotRphi;
+    MonitorElement*  meNumTotrphi;
     MonitorElement*  meNumTotSas;
     MonitorElement*  meNumTotMatched;
   };
  
   struct SubDetMEs{ // MEs for Subdetector Level
-    MonitorElement*  meNumRphi;
+    MonitorElement*  meNumrphi;
     MonitorElement*  meNumSas;
     MonitorElement*  meNumMatched;
   };
 
   struct LayerMEs{ // MEs for Layer Level
-    MonitorElement* meNstpRphi;
-    MonitorElement* meAdcRphi;
-    MonitorElement* mePosxRphi;
-    MonitorElement* meErrxRphi;
-    MonitorElement* meResRphi;
-    MonitorElement* mePullLFRphi;
-    MonitorElement* mePullMFRphi;
-    MonitorElement* meChi2Rphi;
+    MonitorElement* meNstprphi;
+    MonitorElement* meAdcrphi;
+    MonitorElement* mePosxrphi;
+    MonitorElement* meErrxrphi;
+    MonitorElement* meResrphi;
+    MonitorElement* mePullLFrphi;
+    MonitorElement* mePullMFrphi;
+    MonitorElement* meChi2rphi;
     
   };
 
@@ -119,24 +119,24 @@ class SiStripRecHitsValid : public edm::EDAnalyzer {
 
   TotalMEs totalMEs;
 
-  bool switchNumTotRphi;
+  bool switchNumTotrphi;
   bool switchNumTotSas;
   bool switchNumTotMatched;
 
 
-  bool switchNumRphi;
+  bool switchNumrphi;
   bool switchNumSas;
   bool switchNumMatched;
 
 
-  bool switchNstpRphi;
-  bool switchAdcRphi;
-  bool switchPosxRphi;
-  bool switchErrxRphi;
-  bool switchResRphi;
-  bool switchPullLFRphi;
-  bool switchPullMFRphi;
-  bool switchChi2Rphi;
+  bool switchNstprphi;
+  bool switchAdcrphi;
+  bool switchPosxrphi;
+  bool switchErrxrphi;
+  bool switchResrphi;
+  bool switchPullLFrphi;
+  bool switchPullMFrphi;
+  bool switchChi2rphi;
   bool switchNstpSas;
   bool switchAdcSas;
   bool switchPosxSas;

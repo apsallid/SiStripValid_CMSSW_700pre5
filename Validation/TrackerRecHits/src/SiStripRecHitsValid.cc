@@ -66,8 +66,8 @@ SiStripRecHitsValid::SiStripRecHitsValid(const ParameterSet& ps) :
 
   SubDetList_ = conf_.getParameter<std::vector<std::string> >("SubDetList");
 
-  edm::ParameterSet ParametersNumTotRphi =  conf_.getParameter<edm::ParameterSet>("TH1NumTotRphi");
-  switchNumTotRphi = ParametersNumTotRphi.getParameter<bool>("switchon");
+  edm::ParameterSet ParametersNumTotrphi =  conf_.getParameter<edm::ParameterSet>("TH1NumTotrphi");
+  switchNumTotrphi = ParametersNumTotrphi.getParameter<bool>("switchon");
 
   edm::ParameterSet ParametersNumTotSas =  conf_.getParameter<edm::ParameterSet>("TH1NumTotSas");
   switchNumTotSas = ParametersNumTotSas.getParameter<bool>("switchon");
@@ -75,8 +75,8 @@ SiStripRecHitsValid::SiStripRecHitsValid(const ParameterSet& ps) :
   edm::ParameterSet ParametersNumTotMatched =  conf_.getParameter<edm::ParameterSet>("TH1NumTotMatched");
   switchNumTotMatched = ParametersNumTotMatched.getParameter<bool>("switchon");
 
-  edm::ParameterSet ParametersNumRphi =  conf_.getParameter<edm::ParameterSet>("TH1NumRphi");
-  switchNumRphi = ParametersNumRphi.getParameter<bool>("switchon");
+  edm::ParameterSet ParametersNumrphi =  conf_.getParameter<edm::ParameterSet>("TH1Numrphi");
+  switchNumrphi = ParametersNumrphi.getParameter<bool>("switchon");
 
   edm::ParameterSet ParametersNumSas =  conf_.getParameter<edm::ParameterSet>("TH1NumSas");
   switchNumSas = ParametersNumSas.getParameter<bool>("switchon");
@@ -84,29 +84,29 @@ SiStripRecHitsValid::SiStripRecHitsValid(const ParameterSet& ps) :
   edm::ParameterSet ParametersNumMatched =  conf_.getParameter<edm::ParameterSet>("TH1NumMatched");
   switchNumMatched = ParametersNumMatched.getParameter<bool>("switchon");
 
-  edm::ParameterSet ParametersNstpRphi =  conf_.getParameter<edm::ParameterSet>("TH1NstpRphi");
-  switchNstpRphi = ParametersNstpRphi.getParameter<bool>("switchon");
+  edm::ParameterSet ParametersNstprphi =  conf_.getParameter<edm::ParameterSet>("TH1Nstprphi");
+  switchNstprphi = ParametersNstprphi.getParameter<bool>("switchon");
 
-  edm::ParameterSet ParametersAdcRphi =  conf_.getParameter<edm::ParameterSet>("TH1AdcRphi");
-  switchAdcRphi = ParametersAdcRphi.getParameter<bool>("switchon");
+  edm::ParameterSet ParametersAdcrphi =  conf_.getParameter<edm::ParameterSet>("TH1Adcrphi");
+  switchAdcrphi = ParametersAdcrphi.getParameter<bool>("switchon");
 
-  edm::ParameterSet ParametersPosxRphi =  conf_.getParameter<edm::ParameterSet>("TH1PosxRphi");
-  switchPosxRphi = ParametersPosxRphi.getParameter<bool>("switchon");
+  edm::ParameterSet ParametersPosxrphi =  conf_.getParameter<edm::ParameterSet>("TH1Posxrphi");
+  switchPosxrphi = ParametersPosxrphi.getParameter<bool>("switchon");
 
-  edm::ParameterSet ParametersErrxRphi =  conf_.getParameter<edm::ParameterSet>("TH1ErrxRphi");
-  switchErrxRphi = ParametersErrxRphi.getParameter<bool>("switchon");
+  edm::ParameterSet ParametersErrxrphi =  conf_.getParameter<edm::ParameterSet>("TH1Errxrphi");
+  switchErrxrphi = ParametersErrxrphi.getParameter<bool>("switchon");
 
-  edm::ParameterSet ParametersResRphi =  conf_.getParameter<edm::ParameterSet>("TH1ResRphi");
-  switchResRphi = ParametersResRphi.getParameter<bool>("switchon");
+  edm::ParameterSet ParametersResrphi =  conf_.getParameter<edm::ParameterSet>("TH1Resrphi");
+  switchResrphi = ParametersResrphi.getParameter<bool>("switchon");
 
-  edm::ParameterSet ParametersPullLFRphi =  conf_.getParameter<edm::ParameterSet>("TH1PullLFRphi");
-  switchPullLFRphi = ParametersPullLFRphi.getParameter<bool>("switchon");
+  edm::ParameterSet ParametersPullLFrphi =  conf_.getParameter<edm::ParameterSet>("TH1PullLFrphi");
+  switchPullLFrphi = ParametersPullLFrphi.getParameter<bool>("switchon");
 
-  edm::ParameterSet ParametersPullMFRphi =  conf_.getParameter<edm::ParameterSet>("TH1PullMFRphi");
-  switchPullMFRphi = ParametersPullMFRphi.getParameter<bool>("switchon");
+  edm::ParameterSet ParametersPullMFrphi =  conf_.getParameter<edm::ParameterSet>("TH1PullMFrphi");
+  switchPullMFrphi = ParametersPullMFrphi.getParameter<bool>("switchon");
 
-  edm::ParameterSet ParametersChi2Rphi =  conf_.getParameter<edm::ParameterSet>("TH1Chi2Rphi");
-  switchChi2Rphi = ParametersChi2Rphi.getParameter<bool>("switchon");
+  edm::ParameterSet ParametersChi2rphi =  conf_.getParameter<edm::ParameterSet>("TH1Chi2rphi");
+  switchChi2rphi = ParametersChi2rphi.getParameter<bool>("switchon");
 
   edm::ParameterSet ParametersNstpSas =  conf_.getParameter<edm::ParameterSet>("TH1NstpSas");
   switchNstpSas = ParametersNstpSas.getParameter<bool>("switchon");
@@ -570,20 +570,20 @@ void SiStripRecHitsValid::analyze(const edm::Event& e, const edm::EventSetup& es
 
       for(int k = 0; k<numrechitrphi1; k++){
 	if(iLayerME != LayerMEsMap.end()){
-	  fillME(iLayerME->second.meNstpRphi,clusizrphi[k]);
-	  fillME(iLayerME->second.meAdcRphi,cluchgrphi[k]);
-	  fillME(iLayerME->second.mePosxRphi,rechitrphix[k]);
-	  fillME(iLayerME->second.meErrxRphi,rechitrphierrx[k]);
-	  fillME(iLayerME->second.meResRphi,rechitrphires[k]);
-	  fillME(iLayerME->second.mePullLFRphi,rechitrphires[k]/sqrt(rechitrphierrx[k]));
-	  fillME(iLayerME->second.mePullMFRphi,rechitrphipullMF[k]);
+	  fillME(iLayerME->second.meNstprphi,clusizrphi[k]);
+	  fillME(iLayerME->second.meAdcrphi,cluchgrphi[k]);
+	  fillME(iLayerME->second.mePosxrphi,rechitrphix[k]);
+	  fillME(iLayerME->second.meErrxrphi,rechitrphierrx[k]);
+	  fillME(iLayerME->second.meResrphi,rechitrphires[k]);
+	  fillME(iLayerME->second.mePullLFrphi,rechitrphires[k]/sqrt(rechitrphierrx[k]));
+	  fillME(iLayerME->second.mePullMFrphi,rechitrphipullMF[k]);
 	}
 
       }
 
       for(int k = 0; k<numrechitrphi2; k++){
 	if(iLayerME != LayerMEsMap.end()){
-	  fillME(iLayerME->second.meChi2Rphi,chi2rphi[k]);
+	  fillME(iLayerME->second.meChi2rphi,chi2rphi[k]);
 	}
       }
 
@@ -634,12 +634,12 @@ void SiStripRecHitsValid::analyze(const edm::Event& e, const edm::EventSetup& es
   std::vector<std::string> SubDetList_; 
   for (std::vector<std::string>::iterator iSubdet  = SubDetList_.begin(); iSubdet != SubDetList_.end(); iSubdet++){
     std::map<std::string, SubDetMEs>::iterator iSubDetME  = SubDetMEsMap.find((*iSubdet));
-    fillME(iSubDetME->second.meNumRphi,std::accumulate(totnumrechitrphi[(*iSubdet)].rbegin(), totnumrechitrphi[(*iSubdet)].rend(), 0));
+    fillME(iSubDetME->second.meNumrphi,std::accumulate(totnumrechitrphi[(*iSubdet)].rbegin(), totnumrechitrphi[(*iSubdet)].rend(), 0));
     fillME(iSubDetME->second.meNumSas,std::accumulate(totnumrechitsas[(*iSubdet)].rbegin(), totnumrechitsas[(*iSubdet)].rend(), 0));
     fillME(iSubDetME->second.meNumMatched,std::accumulate(totnumrechitmatched[(*iSubdet)].rbegin(), totnumrechitmatched[(*iSubdet)].rend(), 0));
   }
 
-  fillME(totalMEs.meNumTotRphi,totrechitrphi);
+  fillME(totalMEs.meNumTotrphi,totrechitrphi);
   fillME(totalMEs.meNumTotSas,totrechitsas);
   fillME(totalMEs.meNumTotMatched,totrechitmatched);
  
@@ -802,19 +802,19 @@ void SiStripRecHitsValid::createMEs(const edm::EventSetup& es){
 //------------------------------------------------------------------------------------------
 void SiStripRecHitsValid::createTotalMEs() 
 {
-  totalMEs.meNumTotRphi = 0;
+  totalMEs.meNumTotrphi = 0;
   totalMEs.meNumTotSas = 0;
   totalMEs.meNumTotMatched = 0;
 
-  //NumTotRphi
-  if(switchNumTotRphi) {
-    totalMEs.meNumTotRphi = bookME1D("TH1NumTotRphi", "TH1NumTotRphi" ,"Num of RecHits");
-    totalMEs.meNumTotRphi->setAxisTitle("Total number of RecHits");
+  //NumTotrphi
+  if(switchNumTotrphi) {
+    totalMEs.meNumTotrphi = bookME1D("TH1NumTotrphi", "TH1NumTotrphi" ,"Num of RecHits");
+    totalMEs.meNumTotrphi->setAxisTitle("Total number of RecHits");
   }
   //NumTotSas
   if(switchNumTotSas) {
     totalMEs.meNumTotSas = bookME1D("TH1NumTotSas", "TH1NumTotSas","Num of RecHits sas");
-    totalMEs.meNumTotSas ->setAxisTitle("Total number of RecHits in stereo modules");
+    totalMEs.meNumTotSas ->setAxisTitle("Total number of RecHits (stereo)");
   }
   //NumTotMatched
   if(switchNumTotMatched) {
@@ -829,54 +829,54 @@ void SiStripRecHitsValid::createLayerMEs(std::string label)
   SiStripHistoId hidmanager;
   LayerMEs layerMEs; 
 
-  layerMEs.meNstpRphi = 0;
-  layerMEs.meAdcRphi = 0;
-  layerMEs.mePosxRphi = 0;
-  layerMEs.meErrxRphi = 0;
-  layerMEs.meResRphi = 0;
-  layerMEs.mePullLFRphi = 0;
-  layerMEs.mePullMFRphi = 0;
-  layerMEs.meChi2Rphi = 0;
+  layerMEs.meNstprphi = 0;
+  layerMEs.meAdcrphi = 0;
+  layerMEs.mePosxrphi = 0;
+  layerMEs.meErrxrphi = 0;
+  layerMEs.meResrphi = 0;
+  layerMEs.mePullLFrphi = 0;
+  layerMEs.mePullMFrphi = 0;
+  layerMEs.meChi2rphi = 0;
 
-  //NstpRphi
-  if(switchNstpRphi) {
-    layerMEs.meNstpRphi = bookME1D("TH1NstpRphi", hidmanager.createHistoLayer("Nstp_rphi","layer",label,"").c_str() ,"Cluster Width - Number of strips that belong to the RecHit cluster"); 
-    layerMEs.meNstpRphi->setAxisTitle(("Cluster Width [nr strips] in "+ label).c_str());
+  //Nstprphi
+  if(switchNstprphi) {
+    layerMEs.meNstprphi = bookME1D("TH1Nstprphi", hidmanager.createHistoLayer("Nstp_rphi","layer",label,"").c_str() ,"Cluster Width - Number of strips that belong to the RecHit cluster"); 
+    layerMEs.meNstprphi->setAxisTitle(("Cluster Width [nr strips] in "+ label).c_str());
   }
-  //AdcRphi
-  if(switchAdcRphi) {
-    layerMEs.meAdcRphi = bookME1D("TH1AdcRphi", hidmanager.createHistoLayer("Adc_rphi","layer",label,"").c_str() ,"RecHit Cluster Charge");
-    layerMEs.meAdcRphi->setAxisTitle(("cluster charge [ADC] in " + label).c_str());
+  //Adcrphi
+  if(switchAdcrphi) {
+    layerMEs.meAdcrphi = bookME1D("TH1Adcrphi", hidmanager.createHistoLayer("Adc_rphi","layer",label,"").c_str() ,"RecHit Cluster Charge");
+    layerMEs.meAdcrphi->setAxisTitle(("cluster charge [ADC] in " + label).c_str());
   }
-  //PosxRphi
-  if(switchPosxRphi) {
-    layerMEs.mePosxRphi = bookME1D("TH1PosxRphi", hidmanager.createHistoLayer("Posx_rphi","layer",label,"").c_str() ,"RecHit x coord."); 
-    layerMEs.mePosxRphi->setAxisTitle(("x RecHit coord. (local frame) in " + label).c_str());
+  //Posxrphi
+  if(switchPosxrphi) {
+    layerMEs.mePosxrphi = bookME1D("TH1Posxrphi", hidmanager.createHistoLayer("Posx_rphi","layer",label,"").c_str() ,"RecHit x coord."); 
+    layerMEs.mePosxrphi->setAxisTitle(("x RecHit coord. (local frame) in " + label).c_str());
   }
-  //ErrxRphi
-  if(switchErrxRphi) {
-    layerMEs.meErrxRphi = bookME1D("TH1ErrxRphi", hidmanager.createHistoLayer("Errx_rphi","layer",label,"").c_str() ,"RecHit err(x) coord.");   //<error>~20micron  
-    layerMEs.meErrxRphi->setAxisTitle(("err(x) RecHit coord. (local frame) in " + label).c_str());
+  //Errxrphi
+  if(switchErrxrphi) {
+    layerMEs.meErrxrphi = bookME1D("TH1Errxrphi", hidmanager.createHistoLayer("Errx_rphi","layer",label,"").c_str() ,"RecHit err(x) coord.");   //<error>~20micron  
+    layerMEs.meErrxrphi->setAxisTitle(("err(x) RecHit coord. (local frame) in " + label).c_str());
   }
-  //ResRphi
-  if(switchResRphi) {
-    layerMEs.meResRphi = bookME1D("TH1ResRphi", hidmanager.createHistoLayer("Res_rphi","layer",label,"").c_str() ,"Residuals of the hit x coordinate"); 
-    layerMEs.meResRphi->setAxisTitle(("RecHit Res(x) in " + label).c_str());
+  //Resrphi
+  if(switchResrphi) {
+    layerMEs.meResrphi = bookME1D("TH1Resrphi", hidmanager.createHistoLayer("Res_rphi","layer",label,"").c_str() ,"Residuals of the hit x coordinate"); 
+    layerMEs.meResrphi->setAxisTitle(("RecHit Res(x) in " + label).c_str());
   }
-  //PullLFRphi
-  if(switchPullLFRphi) {
-    layerMEs.mePullLFRphi = bookME1D("TH1PullLFRphi", hidmanager.createHistoLayer("Pull_LF_rphi","layer",label,"").c_str() ,"Pull distribution");  
-    layerMEs.mePullLFRphi->setAxisTitle(("Pull distribution (local frame) in " + label).c_str());
+  //PullLFrphi
+  if(switchPullLFrphi) {
+    layerMEs.mePullLFrphi = bookME1D("TH1PullLFrphi", hidmanager.createHistoLayer("Pull_LF_rphi","layer",label,"").c_str() ,"Pull distribution");  
+    layerMEs.mePullLFrphi->setAxisTitle(("Pull distribution (local frame) in " + label).c_str());
   }
-  //PullMFRphi
-  if(switchPullMFRphi) {
-    layerMEs.mePullMFRphi = bookME1D("TH1PullMFRphi", hidmanager.createHistoLayer("Pull_MF_rphi","layer",label,"").c_str() ,"Pull distribution");  
-    layerMEs.mePullMFRphi->setAxisTitle(("Pull distribution (measurement frame) in " + label).c_str());
+  //PullMFrphi
+  if(switchPullMFrphi) {
+    layerMEs.mePullMFrphi = bookME1D("TH1PullMFrphi", hidmanager.createHistoLayer("Pull_MF_rphi","layer",label,"").c_str() ,"Pull distribution");  
+    layerMEs.mePullMFrphi->setAxisTitle(("Pull distribution (measurement frame) in " + label).c_str());
   }
-  //Chi2Rphi
-  if(switchChi2Rphi) {
-    layerMEs.meChi2Rphi = bookME1D("TH1Chi2Rphi", hidmanager.createHistoLayer("Chi2_rphi","layer",label,"").c_str() ,"RecHit Chi2 test"); 
-    layerMEs.meChi2Rphi->setAxisTitle(("RecHit Chi2 test in " + label).c_str()); 
+  //Chi2rphi
+  if(switchChi2rphi) {
+    layerMEs.meChi2rphi = bookME1D("TH1Chi2rphi", hidmanager.createHistoLayer("Chi2_rphi","layer",label,"").c_str() ,"RecHit Chi2 test"); 
+    layerMEs.meChi2rphi->setAxisTitle(("RecHit Chi2 test in " + label).c_str()); 
   }
 
   LayerMEsMap[label]=layerMEs;
@@ -987,16 +987,16 @@ void SiStripRecHitsValid::createStereoAndMatchedMEs(std::string label)
 void SiStripRecHitsValid::createSubDetMEs(std::string label) {
 
   SubDetMEs subdetMEs;
-  subdetMEs.meNumRphi = 0;
+  subdetMEs.meNumrphi = 0;
   subdetMEs.meNumSas = 0;
   subdetMEs.meNumMatched = 0;
 
   std::string HistoName;
-  //NumRphi
-  if (switchNumRphi){
-    HistoName = "TH1NumRphi__" + label;
-    subdetMEs.meNumRphi = bookME1D("TH1NumRphi",HistoName.c_str(),"Num of RecHits");
-    subdetMEs.meNumRphi->setAxisTitle(("Total number of RecHits in "+ label).c_str());
+  //Numrphi
+  if (switchNumrphi){
+    HistoName = "TH1Numrphi__" + label;
+    subdetMEs.meNumrphi = bookME1D("TH1Numrphi",HistoName.c_str(),"Num of RecHits");
+    subdetMEs.meNumrphi->setAxisTitle(("Total number of RecHits in "+ label).c_str());
   }  
   //NumSas
   if (switchNumSas){

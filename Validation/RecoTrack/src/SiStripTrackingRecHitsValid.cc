@@ -1,28 +1,16 @@
-// File: SiStripTrackingRecHitsValid.cc
-// // Author:  Arnaud Gay.
-// Creation Date:  July 2006.
-//
-//--------------------------------------------
-
 #include <memory>
 #include <string>
 #include <iostream>
 #include <TMath.h>
 #include "Validation/RecoTrack/interface/SiStripTrackingRecHitsValid.h"
 
-#include "DataFormats/TrajectorySeed/interface/TrajectorySeedCollection.h"
 #include "FWCore/Framework/interface/ESHandle.h"
-#include "DataFormats/GeometryVector/interface/GlobalVector.h"
-
-#include "DataFormats/GeometryVector/interface/LocalVector.h"
 
 #include "Geometry/TrackerGeometryBuilder/interface/TrackerGeometry.h"
 #include "Geometry/Records/interface/TrackerDigiGeometryRecord.h"
 #include "TrackingTools/Records/interface/TransientRecHitRecord.h"
 #include "Geometry/TrackerGeometryBuilder/interface/GluedGeomDet.h"
 
-#include "DataFormats/TrackReco/interface/Track.h"
-#include "DataFormats/TrackReco/interface/TrackExtra.h"
 #include "DataFormats/TrackerRecHit2D/interface/SiStripMatchedRecHit2D.h"
 #include "DataFormats/DetId/interface/DetId.h"
 #include "DataFormats/SiStripDetId/interface/StripSubdetector.h"
@@ -58,10 +46,12 @@ class TFile;
 SiStripTrackingRecHitsValid::SiStripTrackingRecHitsValid(const edm::ParameterSet& ps) : 
   dbe_(edm::Service<DQMStore>().operator->()),	
   conf_(ps),
-  m_cacheID_(0),
-  trajectoryInput_( ps.getParameter<edm::InputTag>("trajectoryInput") )
+  m_cacheID_(0)
+  // trajectoryInput_( ps.getParameter<edm::InputTag>("trajectoryInput") )
 {
   topFolderName_ = conf_.getParameter<std::string>("TopFolderName");
+  
+  trajectoryInputToken_ = consumes<std::vector<Trajectory> >( conf_.getParameter<edm::InputTag>("trajectoryInput") ); 
 
   edm::ParameterSet ParametersErrx_LF =  conf_.getParameter<edm::ParameterSet>("TH1Errx_LF");
   layerswitchErrx_LF = ParametersErrx_LF.getParameter<bool>("layerswitchon");
@@ -538,8 +528,9 @@ void SiStripTrackingRecHitsValid::analyze(const edm::Event & e, const edm::Event
 
   // Mangano's
 
-  edm::Handle < vector < Trajectory > >trajCollectionHandle;
-  e.getByLabel(trajectoryInput_, trajCollectionHandle);
+  edm::Handle < std::vector<Trajectory> > trajCollectionHandle;
+  // e.getByLabel(trajectoryInput_, trajCollectionHandle);
+  e.getByToken(trajectoryInputToken_, trajCollectionHandle);
 
   edm::LogVerbatim("TrajectoryAnalyzer") << "trajColl->size(): " << trajCollectionHandle->size();
 
@@ -2042,7 +2033,7 @@ void SiStripTrackingRecHitsValid::createMEs(const edm::EventSetup& es){
 
   SiStripFolderOrganizer folder_organizer;
   // folder_organizer.setSiStripFolderName(topFolderName_);
-  std::string curfold = topFolderName_ +  "SISTRIP";
+  std::string curfold = topFolderName_;
   folder_organizer.setSiStripFolderName(curfold);
   folder_organizer.setSiStripFolder();
 
@@ -2728,137 +2719,137 @@ void SiStripTrackingRecHitsValid::createStereoAndMatchedMEs(std::string label)
   //NstpSas
   if(layerswitchNstpSas) {
     stereoandmatchedMEs.meNstpSas = bookME1D("TH1NstpSas", hidmanager.createHistoLayer("Nstp_sas","layer",label,"").c_str() ,"Cluster Width - Number of strips that belong to the RecHit cluster");  
-    stereoandmatchedMEs.meNstpSas->setAxisTitle(("Cluster Width [nr strips] in stereo modules in "+ label).c_str());
+    stereoandmatchedMEs.meNstpSas->setAxisTitle(("Cluster Width [nr strips] (stereo) in "+ label).c_str());
   }
   //AdcSas
   if(layerswitchAdcSas) {
     stereoandmatchedMEs.meAdcSas = bookME1D("TH1AdcSas", hidmanager.createHistoLayer("Adc_sas","layer",label,"").c_str() ,"RecHit Cluster Charge"); 
-    stereoandmatchedMEs.meAdcSas->setAxisTitle(("cluster charge [ADC] in stereo modules in " + label).c_str());
+    stereoandmatchedMEs.meAdcSas->setAxisTitle(("cluster charge [ADC] (stereo) in " + label).c_str());
   }
   //PosxSas
   if(layerswitchPosxSas) {
     stereoandmatchedMEs.mePosxSas = bookME1D("TH1PosxSas", hidmanager.createHistoLayer("Posx_sas","layer",label,"").c_str() ,"RecHit x coord."); 
-    stereoandmatchedMEs.mePosxSas->setAxisTitle(("x RecHit coord. (local frame) in stereo modules in " + label).c_str());
+    stereoandmatchedMEs.mePosxSas->setAxisTitle(("x RecHit coord. (local frame) (stereo) in " + label).c_str());
   }
   //ErrxLFSas
   if(layerswitchErrxLFSas) {
     stereoandmatchedMEs.meErrxLFSas = bookME1D("TH1ErrxLFSas", hidmanager.createHistoLayer("Errx_LF_sas","layer",label,"").c_str() ,"RecHit err(x) coord.");  
-    stereoandmatchedMEs.meErrxLFSas->setAxisTitle(("err(x) RecHit coord. (local frame) in stereo modules in " + label).c_str());
+    stereoandmatchedMEs.meErrxLFSas->setAxisTitle(("err(x) RecHit coord. (local frame) (stereo) in " + label).c_str());
   }
   //ErrxMFSas
   if(layerswitchErrxMFSas) {
     stereoandmatchedMEs.meErrxMFSas = bookME1D("TH1ErrxMFSas", hidmanager.createHistoLayer("Errx_MF_sas","layer",label,"").c_str() ,"RecHit err(x) coord.");  
-    stereoandmatchedMEs.meErrxMFSas->setAxisTitle(("err(x) RecHit coord. (measurement frame) in stereo modules in " + label).c_str());
+    stereoandmatchedMEs.meErrxMFSas->setAxisTitle(("err(x) RecHit coord. (measurement frame) (stereo) in " + label).c_str());
   }
   //ResLFSas
   if(layerswitchResLFSas) {
     stereoandmatchedMEs.meResLFSas = bookME1D("TH1ResLFSas", hidmanager.createHistoLayer("Res_LF_sas","layer",label,"").c_str() ,"Residual of the hit x coordinate"); 
-    stereoandmatchedMEs.meResLFSas->setAxisTitle(("Hit Residuals(x) (local frame) in stereo modules in " + label).c_str());
+    stereoandmatchedMEs.meResLFSas->setAxisTitle(("Hit Residuals(x) (local frame) (stereo) in " + label).c_str());
   }
   //ResMFSas
   if(layerswitchResMFSas) {
     stereoandmatchedMEs.meResMFSas = bookME1D("TH1ResMFSas", hidmanager.createHistoLayer("Res_MF_sas","layer",label,"").c_str() ,"Residual of the hit x coordinate"); 
-    stereoandmatchedMEs.meResMFSas->setAxisTitle(("Hit Residuals(x) in stereo modules in " + label).c_str());
+    stereoandmatchedMEs.meResMFSas->setAxisTitle(("Hit Residuals(x) (stereo) in " + label).c_str());
   }
   //PullLFSas
   if(layerswitchPullLFSas) {
     stereoandmatchedMEs.mePullLFSas = bookME1D("TH1PullLFSas", hidmanager.createHistoLayer("Pull_LF_sas","layer",label,"").c_str() ,"Pull distribution");  
-    stereoandmatchedMEs.mePullLFSas->setAxisTitle(("Pull distribution (local frame) in stereo modules in " + label).c_str());
+    stereoandmatchedMEs.mePullLFSas->setAxisTitle(("Pull distribution (local frame) (stereo) in " + label).c_str());
   }
   //PullMFSas
   if(layerswitchPullMFSas) {
     stereoandmatchedMEs.mePullMFSas = bookME1D("TH1PullMFSas", hidmanager.createHistoLayer("Pull_MF_sas","layer",label,"").c_str() ,"Pull distribution");  
-    stereoandmatchedMEs.mePullMFSas->setAxisTitle(("Pull distribution (measurement frame) in stereo modules in " + label).c_str());
+    stereoandmatchedMEs.mePullMFSas->setAxisTitle(("Pull distribution (measurement frame) (stereo) in " + label).c_str());
   }
 
   if(layerswitchTrackangleSas) {
     stereoandmatchedMEs.meTrackangleSas = bookME1D("TH1TrackangleSas",hidmanager.createHistoLayer("Track_angle_Sas","layer",label,"").c_str() ,"Track angle");
-    stereoandmatchedMEs.meTrackangleSas->setAxisTitle(("Track angle in stereo modules in " + label).c_str());
+    stereoandmatchedMEs.meTrackangleSas->setAxisTitle(("Track angle (stereo) in " + label).c_str());
   }
   if(layerswitchTrackanglebetaSas) {
     stereoandmatchedMEs.meTrackanglebetaSas = bookME1D("TH1TrackanglebetaSas",hidmanager.createHistoLayer("Track_angle_beta_Sas","layer",label,"").c_str() ,"Track angle beta");
-    stereoandmatchedMEs.meTrackanglebetaSas->setAxisTitle(("Track angle beta in stereo modules in " + label).c_str());
+    stereoandmatchedMEs.meTrackanglebetaSas->setAxisTitle(("Track angle beta (stereo) in " + label).c_str());
   }
   if(layerswitchPullTrackangleProfileSas) {
-    stereoandmatchedMEs.mePullTrackangleProfileSas = bookMEProfile("TProfPullTrackangleProfileSas",hidmanager.createHistoLayer("Pull_Track_angle_Profile_Sas","layer",label,"").c_str() ,"Profile of Pull in MF vs track angle in stereo modules");
-    stereoandmatchedMEs.mePullTrackangleProfileSas->setAxisTitle(("track angle in stereo modules in " + label).c_str(),1);
-    stereoandmatchedMEs.mePullTrackangleProfileSas->setAxisTitle(("Pull in MF in stereo modules in " + label).c_str(),2);
+    stereoandmatchedMEs.mePullTrackangleProfileSas = bookMEProfile("TProfPullTrackangleProfileSas",hidmanager.createHistoLayer("Pull_Track_angle_Profile_Sas","layer",label,"").c_str() ,"Profile of Pull in MF vs track angle (stereo)");
+    stereoandmatchedMEs.mePullTrackangleProfileSas->setAxisTitle(("track angle (stereo) in " + label).c_str(),1);
+    stereoandmatchedMEs.mePullTrackangleProfileSas->setAxisTitle(("Pull in MF (stereo) in " + label).c_str(),2);
   }
   if(layerswitchTrackwidthSas) {
     stereoandmatchedMEs.meTrackwidthSas = bookME1D("TH1TrackwidthSas",hidmanager.createHistoLayer("Track_width_Sas","layer",label,"").c_str() ,"Track width");
-    stereoandmatchedMEs.meTrackwidthSas->setAxisTitle(("Track width in stereo modules in " + label).c_str());
+    stereoandmatchedMEs.meTrackwidthSas->setAxisTitle(("Track width (stereo) in " + label).c_str());
   }
   if(layerswitchExpectedwidthSas) {
     stereoandmatchedMEs.meExpectedwidthSas = bookME1D("TH1ExpectedwidthSas",hidmanager.createHistoLayer("Expected_width_Sas","layer",label,"").c_str() ,"Expected width");
-    stereoandmatchedMEs.meExpectedwidthSas->setAxisTitle(("Expected width in stereo modules in " + label).c_str());
+    stereoandmatchedMEs.meExpectedwidthSas->setAxisTitle(("Expected width (stereo) in " + label).c_str());
   }
   if(layerswitchClusterwidthSas) {
     stereoandmatchedMEs.meClusterwidthSas = bookME1D("TH1ClusterwidthSas",hidmanager.createHistoLayer("Cluster_width_Sas","layer",label,"").c_str() ,"Cluster width");
-    stereoandmatchedMEs.meClusterwidthSas->setAxisTitle(("Cluster width in stereo modules in " + label).c_str());
+    stereoandmatchedMEs.meClusterwidthSas->setAxisTitle(("Cluster width (stereo) in " + label).c_str());
   }
   if(layerswitchCategorySas) {
     stereoandmatchedMEs.meCategorySas = bookME1D("TH1CategorySas",hidmanager.createHistoLayer("Category_Sas","layer",label,"").c_str() ,"Category");
-    stereoandmatchedMEs.meCategorySas->setAxisTitle(("Category in stereo modules in " + label).c_str());
+    stereoandmatchedMEs.meCategorySas->setAxisTitle(("Category (stereo) in " + label).c_str());
   }
   if(layerswitchPullTrackwidthProfileSas) {
-    stereoandmatchedMEs.mePullTrackwidthProfileSas = bookMEProfile("TProfPullTrackwidthProfileSas",hidmanager.createHistoLayer("Pull_Track_width_Profile_Sas","layer",label,"").c_str() ,"Profile of Pull in MF vs track width in stereo modules");
-    stereoandmatchedMEs.mePullTrackwidthProfileSas->setAxisTitle(("track width in stereo modules in " + label).c_str(),1);
-    stereoandmatchedMEs.mePullTrackwidthProfileSas->setAxisTitle(("Pull in MF in stereo modules in " + label).c_str(),2);
+    stereoandmatchedMEs.mePullTrackwidthProfileSas = bookMEProfile("TProfPullTrackwidthProfileSas",hidmanager.createHistoLayer("Pull_Track_width_Profile_Sas","layer",label,"").c_str() ,"Profile of Pull in MF vs track width (stereo)");
+    stereoandmatchedMEs.mePullTrackwidthProfileSas->setAxisTitle(("track width (stereo) in " + label).c_str(),1);
+    stereoandmatchedMEs.mePullTrackwidthProfileSas->setAxisTitle(("Pull in MF (stereo) in " + label).c_str(),2);
   }
   if(layerswitchPullTrackwidthProfileCategory1Sas) {
-    stereoandmatchedMEs.mePullTrackwidthProfileCategory1Sas = bookMEProfile("TProfPullTrackwidthProfileCategory1Sas",hidmanager.createHistoLayer("Pull_Track_width_Profile_Category1_Sas","layer",label,"").c_str() ,"Profile of Pull in MF vs track width (Category 1) in stereo modules");
-    stereoandmatchedMEs.mePullTrackwidthProfileCategory1Sas->setAxisTitle(("track width (Category 1) in stereo modules in " + label).c_str(),1);
-    stereoandmatchedMEs.mePullTrackwidthProfileCategory1Sas->setAxisTitle(("Pull in MF (Category 1) in stereo modules in " + label).c_str(),2);
+    stereoandmatchedMEs.mePullTrackwidthProfileCategory1Sas = bookMEProfile("TProfPullTrackwidthProfileCategory1Sas",hidmanager.createHistoLayer("Pull_Track_width_Profile_Category1_Sas","layer",label,"").c_str() ,"Profile of Pull in MF vs track width (Category 1) (stereo)");
+    stereoandmatchedMEs.mePullTrackwidthProfileCategory1Sas->setAxisTitle(("track width (Category 1) (stereo) in " + label).c_str(),1);
+    stereoandmatchedMEs.mePullTrackwidthProfileCategory1Sas->setAxisTitle(("Pull in MF (Category 1) (stereo) in " + label).c_str(),2);
   }
   if(layerswitchPullTrackwidthProfileCategory2Sas) {
-    stereoandmatchedMEs.mePullTrackwidthProfileCategory2Sas = bookMEProfile("TProfPullTrackwidthProfileCategory2Sas",hidmanager.createHistoLayer("Pull_Track_width_Profile_Category2_Sas","layer",label,"").c_str() ,"Profile of Pull in MF vs track width (Category 2) in stereo modules");
-    stereoandmatchedMEs.mePullTrackwidthProfileCategory2Sas->setAxisTitle(("track width (Category 2) in stereo modules in " + label).c_str(),1);
-    stereoandmatchedMEs.mePullTrackwidthProfileCategory2Sas->setAxisTitle(("Pull in MF (Category 2) in stereo modules in " + label).c_str(),2);
+    stereoandmatchedMEs.mePullTrackwidthProfileCategory2Sas = bookMEProfile("TProfPullTrackwidthProfileCategory2Sas",hidmanager.createHistoLayer("Pull_Track_width_Profile_Category2_Sas","layer",label,"").c_str() ,"Profile of Pull in MF vs track width (Category 2) (stereo)");
+    stereoandmatchedMEs.mePullTrackwidthProfileCategory2Sas->setAxisTitle(("track width (Category 2) (stereo) in " + label).c_str(),1);
+    stereoandmatchedMEs.mePullTrackwidthProfileCategory2Sas->setAxisTitle(("Pull in MF (Category 2) (stereo) in " + label).c_str(),2);
   }
   if(layerswitchPullTrackwidthProfileCategory3Sas) {
-    stereoandmatchedMEs.mePullTrackwidthProfileCategory3Sas = bookMEProfile("TProfPullTrackwidthProfileCategory3Sas",hidmanager.createHistoLayer("Pull_Track_width_Profile_Category3_Sas","layer",label,"").c_str() ,"Profile of Pull in MF vs track width (Category 3) in stereo modules");
-    stereoandmatchedMEs.mePullTrackwidthProfileCategory3Sas->setAxisTitle(("track width (Category 3) in stereo modules in " + label).c_str(),1);
-    stereoandmatchedMEs.mePullTrackwidthProfileCategory3Sas->setAxisTitle(("Pull in MF (Category 3) in stereo modules in " + label).c_str(),2);
+    stereoandmatchedMEs.mePullTrackwidthProfileCategory3Sas = bookMEProfile("TProfPullTrackwidthProfileCategory3Sas",hidmanager.createHistoLayer("Pull_Track_width_Profile_Category3_Sas","layer",label,"").c_str() ,"Profile of Pull in MF vs track width (Category 3) (stereo)");
+    stereoandmatchedMEs.mePullTrackwidthProfileCategory3Sas->setAxisTitle(("track width (Category 3) (stereo) in " + label).c_str(),1);
+    stereoandmatchedMEs.mePullTrackwidthProfileCategory3Sas->setAxisTitle(("Pull in MF (Category 3) (stereo) in " + label).c_str(),2);
   }
   if(layerswitchPullTrackwidthProfileCategory4Sas) {
-    stereoandmatchedMEs.mePullTrackwidthProfileCategory4Sas = bookMEProfile("TProfPullTrackwidthProfileCategory4Sas",hidmanager.createHistoLayer("Pull_Track_width_Profile_Category4_Sas","layer",label,"").c_str() ,"Profile of Pull in MF vs track width (Category 4) in stereo modules");
-    stereoandmatchedMEs.mePullTrackwidthProfileCategory4Sas->setAxisTitle(("track width (Category 4) in stereo modules in " + label).c_str(),1);
-    stereoandmatchedMEs.mePullTrackwidthProfileCategory4Sas->setAxisTitle(("Pull in MF (Category 4) in stereo modules in " + label).c_str(),2);
+    stereoandmatchedMEs.mePullTrackwidthProfileCategory4Sas = bookMEProfile("TProfPullTrackwidthProfileCategory4Sas",hidmanager.createHistoLayer("Pull_Track_width_Profile_Category4_Sas","layer",label,"").c_str() ,"Profile of Pull in MF vs track width (Category 4) (stereo)");
+    stereoandmatchedMEs.mePullTrackwidthProfileCategory4Sas->setAxisTitle(("track width (Category 4) (stereo) in " + label).c_str(),1);
+    stereoandmatchedMEs.mePullTrackwidthProfileCategory4Sas->setAxisTitle(("Pull in MF (Category 4) (stereo) in " + label).c_str(),2);
   }
   if(layerswitchErrxMFTrackwidthProfileSas) {
-    stereoandmatchedMEs.meErrxMFTrackwidthProfileSas = bookMEProfile("TProfErrxMFTrackwidthProfileSas",hidmanager.createHistoLayer("ErrxMF_Track_width_Profile_Sas","layer",label,"").c_str() ,"Profile of Resolution in MF vs track width in stereo modules");
-    stereoandmatchedMEs.meErrxMFTrackwidthProfileSas->setAxisTitle(("track width in stereo modules in " + label).c_str(),1);
-    stereoandmatchedMEs.meErrxMFTrackwidthProfileSas->setAxisTitle(("Resolution in MF in stereo modules in " + label).c_str(),2);
+    stereoandmatchedMEs.meErrxMFTrackwidthProfileSas = bookMEProfile("TProfErrxMFTrackwidthProfileSas",hidmanager.createHistoLayer("ErrxMF_Track_width_Profile_Sas","layer",label,"").c_str() ,"Profile of Resolution in MF vs track width (stereo)");
+    stereoandmatchedMEs.meErrxMFTrackwidthProfileSas->setAxisTitle(("track width (stereo) in " + label).c_str(),1);
+    stereoandmatchedMEs.meErrxMFTrackwidthProfileSas->setAxisTitle(("Resolution in MF (stereo) in " + label).c_str(),2);
   }
   if(layerswitchErrxMFTrackwidthProfileCategory1Sas) {
-    stereoandmatchedMEs.meErrxMFTrackwidthProfileCategory1Sas = bookMEProfile("TProfErrxMFTrackwidthProfileCategory1Sas",hidmanager.createHistoLayer("ErrxMF_Track_width_Profile_Category1_Sas","layer",label,"").c_str() ,"Profile of Resolution in MF vs track width (Category 1) in stereo modules");
-    stereoandmatchedMEs.meErrxMFTrackwidthProfileCategory1Sas->setAxisTitle((" track width (Category 1) in stereo modules in " + label).c_str(),1);
-    stereoandmatchedMEs.meErrxMFTrackwidthProfileCategory1Sas->setAxisTitle(("  Resolution in MF (Category 1) in stereo modules in " + label).c_str(),2);
+    stereoandmatchedMEs.meErrxMFTrackwidthProfileCategory1Sas = bookMEProfile("TProfErrxMFTrackwidthProfileCategory1Sas",hidmanager.createHistoLayer("ErrxMF_Track_width_Profile_Category1_Sas","layer",label,"").c_str() ,"Profile of Resolution in MF vs track width (Category 1) (stereo)");
+    stereoandmatchedMEs.meErrxMFTrackwidthProfileCategory1Sas->setAxisTitle((" track width (Category 1) (stereo) in " + label).c_str(),1);
+    stereoandmatchedMEs.meErrxMFTrackwidthProfileCategory1Sas->setAxisTitle(("  Resolution in MF (Category 1) (stereo) in " + label).c_str(),2);
   }
   if(layerswitchErrxMFTrackwidthProfileCategory2Sas) {
-    stereoandmatchedMEs.meErrxMFTrackwidthProfileCategory2Sas = bookMEProfile("TProfErrxMFTrackwidthProfileCategory2Sas",hidmanager.createHistoLayer("ErrxMF_Track_width_Profile_Category2_Sas","layer",label,"").c_str() ,"Profile of Resolution in MF vs track width (Category 2) in stereo modules");
-    stereoandmatchedMEs.meErrxMFTrackwidthProfileCategory2Sas->setAxisTitle((" track width (Category 2) in stereo modules in " + label).c_str(),1);
-    stereoandmatchedMEs.meErrxMFTrackwidthProfileCategory2Sas->setAxisTitle((" Resolution in MF (Category 2) in stereo modules in " + label).c_str(),2);
+    stereoandmatchedMEs.meErrxMFTrackwidthProfileCategory2Sas = bookMEProfile("TProfErrxMFTrackwidthProfileCategory2Sas",hidmanager.createHistoLayer("ErrxMF_Track_width_Profile_Category2_Sas","layer",label,"").c_str() ,"Profile of Resolution in MF vs track width (Category 2) (stereo)");
+    stereoandmatchedMEs.meErrxMFTrackwidthProfileCategory2Sas->setAxisTitle((" track width (Category 2) (stereo) in " + label).c_str(),1);
+    stereoandmatchedMEs.meErrxMFTrackwidthProfileCategory2Sas->setAxisTitle((" Resolution in MF (Category 2) (stereo) in " + label).c_str(),2);
   }
   if(layerswitchErrxMFTrackwidthProfileCategory3Sas) {
-    stereoandmatchedMEs.meErrxMFTrackwidthProfileCategory3Sas = bookMEProfile("TProfErrxMFTrackwidthProfileCategory3Sas",hidmanager.createHistoLayer("ErrxMF_Track_width_Profile_Category3_Sas","layer",label,"").c_str() ,"Profile of Resolution in MF vs track width (Category 3) in stereo modules");
-    stereoandmatchedMEs.meErrxMFTrackwidthProfileCategory3Sas->setAxisTitle((" track width (Category 3) in stereo modules in " + label).c_str(),1);
-    stereoandmatchedMEs.meErrxMFTrackwidthProfileCategory3Sas->setAxisTitle((" Resolution in MF (Category 3) in stereo modules in " + label).c_str(),2);
+    stereoandmatchedMEs.meErrxMFTrackwidthProfileCategory3Sas = bookMEProfile("TProfErrxMFTrackwidthProfileCategory3Sas",hidmanager.createHistoLayer("ErrxMF_Track_width_Profile_Category3_Sas","layer",label,"").c_str() ,"Profile of Resolution in MF vs track width (Category 3) (stereo)");
+    stereoandmatchedMEs.meErrxMFTrackwidthProfileCategory3Sas->setAxisTitle((" track width (Category 3) (stereo) in " + label).c_str(),1);
+    stereoandmatchedMEs.meErrxMFTrackwidthProfileCategory3Sas->setAxisTitle((" Resolution in MF (Category 3) (stereo) in " + label).c_str(),2);
   }
   if(layerswitchErrxMFTrackwidthProfileCategory4Sas) {
-    stereoandmatchedMEs.meErrxMFTrackwidthProfileCategory4Sas = bookMEProfile("TProfErrxMFTrackwidthProfileCategory4Sas",hidmanager.createHistoLayer("ErrxMF_Track_width_Profile_Category4_Sas","layer",label,"").c_str() ,"Profile of Resolution in MF vs track width (Category 4) in stereo modules");
-    stereoandmatchedMEs.meErrxMFTrackwidthProfileCategory4Sas->setAxisTitle((" track width (Category 4) in stereo modules in " + label).c_str(),1);
-    stereoandmatchedMEs.meErrxMFTrackwidthProfileCategory4Sas->setAxisTitle((" Resolution in MF (Category 4) in stereo modules in " + label).c_str(),2);
+    stereoandmatchedMEs.meErrxMFTrackwidthProfileCategory4Sas = bookMEProfile("TProfErrxMFTrackwidthProfileCategory4Sas",hidmanager.createHistoLayer("ErrxMF_Track_width_Profile_Category4_Sas","layer",label,"").c_str() ,"Profile of Resolution in MF vs track width (Category 4) (stereo)");
+    stereoandmatchedMEs.meErrxMFTrackwidthProfileCategory4Sas->setAxisTitle((" track width (Category 4) (stereo) in " + label).c_str(),1);
+    stereoandmatchedMEs.meErrxMFTrackwidthProfileCategory4Sas->setAxisTitle((" Resolution in MF (Category 4) (stereo) in " + label).c_str(),2);
   }
   if(layerswitchErrxMFClusterwidthProfileCategory1Sas) {
-    stereoandmatchedMEs.meErrxMFClusterwidthProfileCategory1Sas = bookMEProfile("TProfErrxMFClusterwidthProfileCategory1Sas",hidmanager.createHistoLayer("ErrxMF_Cluster_width_Profile_Category1_Sas","layer",label,"").c_str() ,"Profile of Resolution in MF vs cluster width (Category 1) in stereo modules");
-    stereoandmatchedMEs.meErrxMFClusterwidthProfileCategory1Sas->setAxisTitle(("cluster width (Category 1) in stereo modules in " + label).c_str(),1);
-    stereoandmatchedMEs.meErrxMFClusterwidthProfileCategory1Sas->setAxisTitle((" Resolution in MF (Category 1) in stereo modules in " + label).c_str(),2);
+    stereoandmatchedMEs.meErrxMFClusterwidthProfileCategory1Sas = bookMEProfile("TProfErrxMFClusterwidthProfileCategory1Sas",hidmanager.createHistoLayer("ErrxMF_Cluster_width_Profile_Category1_Sas","layer",label,"").c_str() ,"Profile of Resolution in MF vs cluster width (Category 1) (stereo)");
+    stereoandmatchedMEs.meErrxMFClusterwidthProfileCategory1Sas->setAxisTitle(("cluster width (Category 1) (stereo) in " + label).c_str(),1);
+    stereoandmatchedMEs.meErrxMFClusterwidthProfileCategory1Sas->setAxisTitle((" Resolution in MF (Category 1) (stereo) in " + label).c_str(),2);
   }
   if(layerswitchErrxMFAngleProfileSas) {
-    stereoandmatchedMEs.meErrxMFAngleProfileSas = bookMEProfile("TProfErrxMFAngleProfileSas",hidmanager.createHistoLayer("ErrxMF_Angle_Profile_Sas","layer",label,"").c_str() ,"Profile of Resolution in MF vs track angle in stereo modules");
-    stereoandmatchedMEs.meErrxMFAngleProfileSas->setAxisTitle(("track angle in stereo modules in " + label).c_str(),1);
-    stereoandmatchedMEs.meErrxMFAngleProfileSas->setAxisTitle(("Resolution in MF in stereo modules in " + label).c_str(),2);
+    stereoandmatchedMEs.meErrxMFAngleProfileSas = bookMEProfile("TProfErrxMFAngleProfileSas",hidmanager.createHistoLayer("ErrxMF_Angle_Profile_Sas","layer",label,"").c_str() ,"Profile of Resolution in MF vs track angle (stereo)");
+    stereoandmatchedMEs.meErrxMFAngleProfileSas->setAxisTitle(("track angle (stereo) in " + label).c_str(),1);
+    stereoandmatchedMEs.meErrxMFAngleProfileSas->setAxisTitle(("Resolution in MF (stereo) in " + label).c_str(),2);
   }
   //PosxMatched
   if(layerswitchPosxMatched) {
