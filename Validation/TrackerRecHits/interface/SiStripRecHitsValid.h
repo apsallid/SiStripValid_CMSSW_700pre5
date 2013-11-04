@@ -1,16 +1,6 @@
 #ifndef SiStripRecHitsValid_h
 #define SiStripRecHitsValid_h
 
-/* \class SiStripRecHitsValid
- *
- * Analyzer to validate RecHits in the Strip tracker
- *
- * \author Patrizia Azzi, INFN PD
- *
- * \version   1st version May 2006
- *
- ************************************************************/
-
 #include "FWCore/Framework/interface/Frameworkfwd.h"
 #include "FWCore/Framework/interface/EDAnalyzer.h"
 #include "FWCore/Framework/interface/Event.h"
@@ -211,38 +201,6 @@ class SiStripRecHitsValid : public edm::EDAnalyzer {
   void rechitanalysis(SiStripRecHit2D const rechit,const StripTopology &topol, TrackerHitAssociator associate);
   void rechitanalysis_matched(SiStripMatchedRecHit2D const rechit, const GluedGeomDet* gluedDet, TrackerHitAssociator associate);
   
-  /* float rechitrphix[MAXHIT]; */
-  /* float rechitrphierrx[MAXHIT]; */
-  /* float rechitrphiy[MAXHIT]; */
-  /* float rechitrphiz[MAXHIT]; */
-  /* float rechitrphires[MAXHIT]; */
-  /* float rechitrphipullMF[MAXHIT]; */
-  /* int   clusizrphi[MAXHIT]; */
-  /* float cluchgrphi[MAXHIT]; */
-  /* float chi2rphi[MAXHIT]; */
-
-  /* float rechitstereox[MAXHIT]; */
-  /* float rechitstereoerrx[MAXHIT]; */
-  /* float rechitstereoy[MAXHIT]; */
-  /* float rechitstereoz[MAXHIT]; */
-  /* float rechitstereores[MAXHIT]; */
-  /* float rechitstereopullMF[MAXHIT]; */
-  /* int   clusizstereo[MAXHIT]; */
-  /* float cluchgstereo[MAXHIT]; */
-  /* float chi2stereo[MAXHIT]; */
-
-  /* float chi2matched[MAXHIT]; */
-  /* float rechitmatchedx[MAXHIT]; */
-  /* float rechitmatchedy[MAXHIT]; */
-  /* float rechitmatchedz[MAXHIT]; */
-  /* float rechitmatchederrxx[MAXHIT]; */
-  /* float rechitmatchederrxy[MAXHIT]; */
-  /* float rechitmatchederryy[MAXHIT]; */
-  /* float rechitmatchedphi[MAXHIT]; */
-  /* float rechitmatchedresx[MAXHIT]; */
-  /* float rechitmatchedresy[MAXHIT]; */
-  /* float rechitmatchedchi2[MAXHIT]; */
-
   //edm::InputTag matchedRecHits_, rphiRecHits_, stereoRecHits_; 
   edm::EDGetTokenT<SiStripMatchedRecHit2DCollection> matchedRecHitsToken_;
   edm::EDGetTokenT<SiStripRecHit2DCollection> rphiRecHitsToken_;
