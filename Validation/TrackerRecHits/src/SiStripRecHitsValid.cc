@@ -69,8 +69,8 @@ SiStripRecHitsValid::SiStripRecHitsValid(const ParameterSet& ps) :
   edm::ParameterSet ParametersNumTotrphi =  conf_.getParameter<edm::ParameterSet>("TH1NumTotrphi");
   switchNumTotrphi = ParametersNumTotrphi.getParameter<bool>("switchon");
 
-  edm::ParameterSet ParametersNumTotSas =  conf_.getParameter<edm::ParameterSet>("TH1NumTotSas");
-  switchNumTotSas = ParametersNumTotSas.getParameter<bool>("switchon");
+  edm::ParameterSet ParametersNumTotStereo =  conf_.getParameter<edm::ParameterSet>("TH1NumTotStereo");
+  switchNumTotStereo = ParametersNumTotStereo.getParameter<bool>("switchon");
 
   edm::ParameterSet ParametersNumTotMatched =  conf_.getParameter<edm::ParameterSet>("TH1NumTotMatched");
   switchNumTotMatched = ParametersNumTotMatched.getParameter<bool>("switchon");
@@ -78,8 +78,8 @@ SiStripRecHitsValid::SiStripRecHitsValid(const ParameterSet& ps) :
   edm::ParameterSet ParametersNumrphi =  conf_.getParameter<edm::ParameterSet>("TH1Numrphi");
   switchNumrphi = ParametersNumrphi.getParameter<bool>("switchon");
 
-  edm::ParameterSet ParametersNumSas =  conf_.getParameter<edm::ParameterSet>("TH1NumSas");
-  switchNumSas = ParametersNumSas.getParameter<bool>("switchon");
+  edm::ParameterSet ParametersNumStereo =  conf_.getParameter<edm::ParameterSet>("TH1NumStereo");
+  switchNumStereo = ParametersNumStereo.getParameter<bool>("switchon");
 
   edm::ParameterSet ParametersNumMatched =  conf_.getParameter<edm::ParameterSet>("TH1NumMatched");
   switchNumMatched = ParametersNumMatched.getParameter<bool>("switchon");
@@ -108,29 +108,29 @@ SiStripRecHitsValid::SiStripRecHitsValid(const ParameterSet& ps) :
   edm::ParameterSet ParametersChi2rphi =  conf_.getParameter<edm::ParameterSet>("TH1Chi2rphi");
   switchChi2rphi = ParametersChi2rphi.getParameter<bool>("switchon");
 
-  edm::ParameterSet ParametersNstpSas =  conf_.getParameter<edm::ParameterSet>("TH1NstpSas");
-  switchNstpSas = ParametersNstpSas.getParameter<bool>("switchon");
+  edm::ParameterSet ParametersNstpStereo =  conf_.getParameter<edm::ParameterSet>("TH1NstpStereo");
+  switchNstpStereo = ParametersNstpStereo.getParameter<bool>("switchon");
 
-  edm::ParameterSet ParametersAdcSas =  conf_.getParameter<edm::ParameterSet>("TH1AdcSas");
-  switchAdcSas = ParametersAdcSas.getParameter<bool>("switchon");
+  edm::ParameterSet ParametersAdcStereo =  conf_.getParameter<edm::ParameterSet>("TH1AdcStereo");
+  switchAdcStereo = ParametersAdcStereo.getParameter<bool>("switchon");
 
-  edm::ParameterSet ParametersPosxSas =  conf_.getParameter<edm::ParameterSet>("TH1PosxSas");
-  switchPosxSas = ParametersPosxSas.getParameter<bool>("switchon");
+  edm::ParameterSet ParametersPosxStereo =  conf_.getParameter<edm::ParameterSet>("TH1PosxStereo");
+  switchPosxStereo = ParametersPosxStereo.getParameter<bool>("switchon");
 
-  edm::ParameterSet ParametersErrxSas =  conf_.getParameter<edm::ParameterSet>("TH1ErrxSas");
-  switchErrxSas = ParametersErrxSas.getParameter<bool>("switchon");
+  edm::ParameterSet ParametersErrxStereo =  conf_.getParameter<edm::ParameterSet>("TH1ErrxStereo");
+  switchErrxStereo = ParametersErrxStereo.getParameter<bool>("switchon");
 
-  edm::ParameterSet ParametersResSas =  conf_.getParameter<edm::ParameterSet>("TH1ResSas");
-  switchResSas = ParametersResSas.getParameter<bool>("switchon");
+  edm::ParameterSet ParametersResStereo =  conf_.getParameter<edm::ParameterSet>("TH1ResStereo");
+  switchResStereo = ParametersResStereo.getParameter<bool>("switchon");
 
-  edm::ParameterSet ParametersPullLFSas =  conf_.getParameter<edm::ParameterSet>("TH1PullLFSas");
-  switchPullLFSas = ParametersPullLFSas.getParameter<bool>("switchon");
+  edm::ParameterSet ParametersPullLFStereo =  conf_.getParameter<edm::ParameterSet>("TH1PullLFStereo");
+  switchPullLFStereo = ParametersPullLFStereo.getParameter<bool>("switchon");
 
-  edm::ParameterSet ParametersPullMFSas =  conf_.getParameter<edm::ParameterSet>("TH1PullMFSas");
-  switchPullMFSas = ParametersPullMFSas.getParameter<bool>("switchon");
+  edm::ParameterSet ParametersPullMFStereo =  conf_.getParameter<edm::ParameterSet>("TH1PullMFStereo");
+  switchPullMFStereo = ParametersPullMFStereo.getParameter<bool>("switchon");
 
-  edm::ParameterSet ParametersChi2Sas =  conf_.getParameter<edm::ParameterSet>("TH1Chi2Sas");
-  switchChi2Sas = ParametersChi2Sas.getParameter<bool>("switchon");
+  edm::ParameterSet ParametersChi2Stereo =  conf_.getParameter<edm::ParameterSet>("TH1Chi2Stereo");
+  switchChi2Stereo = ParametersChi2Stereo.getParameter<bool>("switchon");
 
   edm::ParameterSet ParametersPosxMatched =  conf_.getParameter<edm::ParameterSet>("TH1PosxMatched");
   switchPosxMatched = ParametersPosxMatched.getParameter<bool>("switchon");
@@ -198,10 +198,6 @@ void SiStripRecHitsValid::analyze(const edm::Event& e, const edm::EventSetup& es
   es.get<IdealGeometryRecord>().get(tTopoHandle);
   const TrackerTopology* const tTopo = tTopoHandle.product();
     
-  //--- get RecHits
-  
-  std::string rechitProducer = "SiStripRecHits2D";
-  
   // Step A: Get Inputs 
   edm::Handle<SiStripMatchedRecHit2DCollection> rechitsmatched;
   edm::Handle<SiStripRecHit2DCollection> rechitsrphi;
@@ -214,20 +210,20 @@ void SiStripRecHitsValid::analyze(const edm::Event& e, const edm::EventSetup& es
   e.getByToken(stereoRecHitsToken_, rechitsstereo);
 
   int numrechitrphi   =0;
-  int numrechitsas    =0;
+  int numrechitstereo    =0;
   int numrechitmatched=0;
 
-  //Variables in order to count total num of rechitrphi,rechitsas, rechitmatched in subdetectors
+  //Variables in order to count total num of rechitrphi,rechitstereo, rechitmatched in subdetectors
   std::map<std::string, std::vector<int> > totnumrechitrphi;
-  std::map<std::string, std::vector<int> > totnumrechitsas;
+  std::map<std::string, std::vector<int> > totnumrechitstereo;
   std::map<std::string, std::vector<int> > totnumrechitmatched;
   totnumrechitrphi.clear();
-  totnumrechitsas.clear();
+  totnumrechitstereo.clear();
   totnumrechitmatched.clear();
   int totrechitrphi =0;
-  int totrechitsas =0;
+  int totrechitstereo =0;
   int totrechitmatched =0;
-
+   
   TrackerHitAssociator associate(e, conf_);
   
   edm::ESHandle<TrackerGeometry> pDD;
@@ -239,42 +235,15 @@ void SiStripRecHitsValid::analyze(const edm::Event& e, const edm::EventSetup& es
   std::transform(rechitsrphi->begin(), rechitsrphi->end(), std::back_inserter(IDs), helper::GetDetId() );
   std::transform(rechitsstereo->begin(), rechitsstereo->end(), std::back_inserter(IDs), helper::GetDetId() );
   std::transform(rechitsmatched->begin(), rechitsmatched->end(), std::back_inserter(IDs), helper::GetDetId() );
-  // loop over detunits
+  // loop over DetIds
   //  for(TrackerGeometry::DetContainer::const_iterator it = pDD->dets().begin(); it != pDD->dets().end(); it++){
-  for(std::vector<DetId>::const_iterator it = IDs.begin(); it != IDs.end(); ++it ){//loop on rphi detector with hits
+  for(std::vector<DetId>::const_iterator it = IDs.begin(); it != IDs.end(); ++it ){//loop on detector with hits
     uint32_t myid=((*it).rawId());       
     DetId detid = ((*it));
     
-    // initialize here
-    for(int i=0; i<MAXHIT; i++){
-      rechitrphix[i] =0;
-      rechitrphierrx[i] =0;
-      rechitrphiy[i] =0;
-      rechitrphiz[i] =0;
-      rechitsasx[i] =0;
-      rechitsaserrx[i] =0;
-      rechitsasy[i] =0;
-      rechitsasz[i] =0;
-      clusizrphi[i] =0;
-      clusizsas[i] =0;
-      cluchgrphi[i] =0;
-      cluchgsas[i] =0;
-      rechitrphires[i]=-999.;
-      rechitsasres[i]=-999.;
-      rechitrphipullMF[i]=-999.;
-      rechitsaspullMF[i]=-999.;
-      chi2rphi[i] =0;
-      chi2sas[i]=0;
-      rechitmatchedx[i] =0;
-      rechitmatchedy[i] =0;
-      rechitmatchedz[i] =0;
-      rechitmatchederrxx[i] =0;
-      rechitmatchederrxy[i] =0;
-      rechitmatchederryy[i] =0;
-      rechitmatchedresx[i]=-999;
-      rechitmatchedresy[i]=-999;
-      chi2matched[i]=0;
-    }
+    rechitrphi.clear();
+    rechitstereo.clear();
+    rechitmatched.clear();
     
     numrechitrphi =0;
     //loop over rechits-rphi in the same subdetector
@@ -285,171 +254,41 @@ void SiStripRecHitsValid::analyze(const edm::Event& e, const edm::EventSetup& es
     
     numrechitrphi = rechitrphiRangeIteratorEnd - rechitrphiRangeIteratorBegin;   
          
-
-    int i=0;
-    int i2=0;
-
     if(numrechitrphi > 0 ){
       totrechitrphi+=numrechitrphi;
       for(iterrphi=rechitrphiRangeIteratorBegin; iterrphi!=rechitrphiRangeIteratorEnd;++iterrphi){
+	
 	const GeomDetUnit *  det = tracker.idToDetUnit(detid);
 	const StripGeomDetUnit * stripdet=(const StripGeomDetUnit*)(det);
 	const StripTopology &topol=(StripTopology&)stripdet->topology();
 	SiStripRecHit2D const rechit=*iterrphi;
-	LocalPoint position=rechit.localPosition();
-	LocalError error=rechit.localPositionError();
-	MeasurementPoint Mposition;
-	MeasurementError Merror;
-	Mposition = topol.measurementPosition(position);
-	Merror = topol.measurementError(position,error);
-	SiStripRecHit2D::ClusterRef clust=rechit.cluster();
-	int clusiz=0;
-	int totcharge=0;
-	clusiz = clust->amplitudes().size();
-	const std::vector<uint8_t> amplitudes=clust->amplitudes();
-	  for(size_t ia=0; ia<amplitudes.size();ia++){
-	    totcharge+=amplitudes[ia];
-	  }
-	rechitrphix[i] = position.x();
-	rechitrphiy[i] = position.y();
-	rechitrphiz[i] = position.z();
-	rechitrphierrx[i] = error.xx();
-	clusizrphi[i] = clusiz;
-	cluchgrphi[i] = totcharge;
-
-	matched.clear();
-	matched = associate.associateHit(rechit);
-	double mindist = 999999;
-	double dist = 999999;
-	PSimHit closest;
-	if(!matched.empty()){
-	  for(vector<PSimHit>::const_iterator m=matched.begin(); m<matched.end(); m++){
-	    dist = fabs(rechitrphix[i] - (*m).localPosition().x());
-	    if(dist<mindist){
-	      mindist = dist;
-	      closest = (*m);
-	    }
-	    rechitrphires[i] = rechitrphix[i] - closest.localPosition().x();
-	  }  
-	  rechitrphipullMF[i] = (Mposition.x() - (topol.measurementPosition(closest.localPosition())).x())/sqrt(Merror.uu());
-
-	  //chi2test compare rechit errors with the simhit position ( using null matrix for the simhit). 
-	  //Can spot problems in the geometry better than a simple residual. (thanks to BorisM)
-	  AlgebraicVector  rhparameters(2);//= rechit.parameters();
-	  rhparameters[0] = position.x(); 
-	  rhparameters[1] = position.y();
-	  AlgebraicVector shparameters(2);
-	  shparameters[0] = closest.localPosition().x();
-	  shparameters[1] = closest.localPosition().y();
-	  AlgebraicVector r(rhparameters - shparameters);
-	  AlgebraicSymMatrix R(2);//  = rechit.parametersError();
-	  R[0][0] = error.xx();
-	  R[0][1] = error.xy();
-	  R[1][1] = error.yy();
-	  int ierr; 
-	  R.invert(ierr); // if (ierr != 0) throw exception;
-	  double est = R.similarity(r);
-	  // 	  std::cout << " ====== Chi2 test rphi hits ====== " << std::endl;
-	  // 	  std::cout << "RecHit param. = " << rhparameters << std::endl;
-	  // 	  std::cout << "RecHit errors = " << R << std::endl;
-	  //	  std::cout << "SimHit param. = " << shparameters << std::endl;
-	  //	  std::cout << " chi2  = " << est << std::endl;
-	  //	  std::cout << "DEBUG BORIS,filling chi2rphi[i],i: " << i << std::endl;
-	  chi2rphi[i2] = est;
-	  i2++;
-	}
-	i++;
+	//analyze RecHits 
+	rechitanalysis(rechit,topol,associate);
+	rechitrphi.push_back(rechitpro);
       }
     }
     
-    //loop over rechits-sas in the same subdetector
-    int j=0;
-    int j2=0;
-    numrechitsas=0;
-    std::pair<SiStripRecHit2DCollection::DetSet::const_iterator,SiStripRecHit2DCollection::DetSet::const_iterator> rechitsasRange = helper::getRange(*rechitsstereo, detid);
-    SiStripRecHit2DCollection::DetSet::const_iterator rechitsasRangeIteratorBegin = rechitsasRange.first;
-    SiStripRecHit2DCollection::DetSet::const_iterator rechitsasRangeIteratorEnd   = rechitsasRange.second;
-    SiStripRecHit2DCollection::DetSet::const_iterator itersas=rechitsasRangeIteratorBegin;
-    numrechitsas = rechitsasRangeIteratorEnd - rechitsasRangeIteratorBegin;   
-    if(numrechitsas > 0){
-      totrechitsas+=numrechitsas;
-      for(itersas=rechitsasRangeIteratorBegin; itersas!=rechitsasRangeIteratorEnd;++itersas){
+    //loop over rechits-stereo in the same subdetector
+    numrechitstereo=0;
+    std::pair<SiStripRecHit2DCollection::DetSet::const_iterator,SiStripRecHit2DCollection::DetSet::const_iterator> rechitstereoRange = helper::getRange(*rechitsstereo, detid);
+    SiStripRecHit2DCollection::DetSet::const_iterator rechitstereoRangeIteratorBegin = rechitstereoRange.first;
+    SiStripRecHit2DCollection::DetSet::const_iterator rechitstereoRangeIteratorEnd   = rechitstereoRange.second;
+    SiStripRecHit2DCollection::DetSet::const_iterator iterstereo=rechitstereoRangeIteratorBegin;
+    numrechitstereo = rechitstereoRangeIteratorEnd - rechitstereoRangeIteratorBegin;   
+    if(numrechitstereo > 0){
+      totrechitstereo+=numrechitstereo;
+      for(iterstereo=rechitstereoRangeIteratorBegin; iterstereo!=rechitstereoRangeIteratorEnd;++iterstereo){
 	const GeomDetUnit *  det = tracker.idToDetUnit(detid);
 	const StripGeomDetUnit * stripdet=(const StripGeomDetUnit*)(det);
 	const StripTopology &topol=(StripTopology&)stripdet->topology();
-	SiStripRecHit2D const rechit=*itersas;
-	LocalPoint position=rechit.localPosition();
-	LocalError error=rechit.localPositionError();
-	MeasurementPoint Mposition;
-	MeasurementError Merror;
-	Mposition = topol.measurementPosition(position);
-	Merror = topol.measurementError(position,error);
-	SiStripRecHit2D::ClusterRef clust=rechit.cluster();	int clusiz=0;
-	int totcharge=0;
-	clusiz = clust->amplitudes().size();
-	const std::vector<uint8_t> amplitudes=clust->amplitudes();
-	for(size_t ia=0; ia<amplitudes.size();ia++){
-	  totcharge+=amplitudes[ia];
-	}
-	
-	rechitsasx[j] = position.x();
-	rechitsasy[j] = position.y();
-	rechitsasz[j] = position.z();
-	rechitsaserrx[j] = error.xx();
-	clusizsas[j] = clusiz;
-	cluchgsas[j] = totcharge;
-	
-	double mindist = 999999;
-	double dist = 999999;
-	PSimHit closest;
-	matched.clear();
-	matched = associate.associateHit(rechit);
-	if(!matched.empty()){
-	  for(vector<PSimHit>::const_iterator m=matched.begin(); m<matched.end(); m++){
-	    dist = fabs(rechitsasx[j] - (*m).localPosition().x());
-	    if(dist<mindist){
-	      mindist = dist;
-	      closest = (*m);
-	    }
-	    rechitsasres[j] = rechitsasx[j] - closest.localPosition().x();
-	  }  
-	  rechitsaspullMF[j] = (Mposition.x() - (topol.measurementPosition(closest.localPosition())).x())/sqrt(Merror.uu());
-	  //chi2test compare rechit errors with the simhit position ( using null matrix for the simhit). 
-	  //Can spot problems in the geometry better than a simple residual. (thanks to BorisM)
-// 	  AlgebraicVector rhparameters = rechit.parameters();
-	  AlgebraicVector  rhparameters(2);//= rechit.parameters();
-	  rhparameters[0] = position.x(); 
-	  rhparameters[1] = position.y();
-	  AlgebraicVector shparameters(2);
-	  shparameters[0] = closest.localPosition().x();
-	  shparameters[1] = closest.localPosition().y();
-	  AlgebraicVector r(rhparameters - shparameters);
-// 	  AlgebraicSymMatrix R  = rechit.parametersError();
-	  AlgebraicSymMatrix R(2);//  = rechit.parametersError();
-	  R[0][0] = error.xx();
-	  R[0][1] = error.xy();
-	  R[1][1] = error.yy();
-	  int ierr; 
-	  R.invert(ierr); // if (ierr != 0) throw exception;
-	  double est = R.similarity(r);
-	  // 	  std::cout << " ====== Chi2 test sas hits ====== " << std::endl;
-	  //	  std::cout << "RecHit param. = " << rhparameters << std::endl;
-	  // 	  std::cout << "RecHit errors = " << R << std::endl;
-	  // 	  std::cout << "SimHit param. = " << shparameters << std::endl;
-	  // 	  std::cout << " chi2  = " << est << std::endl;
-	  //	  std::cout << "DEBUG BORIS,filling chi2sas[j],j: " << i << std::endl;
-	  chi2sas[j2] = est;
-	  j2++;
-	}
-	j++;
+	SiStripRecHit2D const rechit=*iterstereo;
+	//analyze RecHits 
+	rechitanalysis(rechit,topol,associate);
+	rechitstereo.push_back(rechitpro);
       }
     }
     
     //now matched hits
-
-    int k=0;
-    int k2=0;
-    
     //loop over rechits-matched in the same subdetector
     numrechitmatched=0;
     std::pair<SiStripMatchedRecHit2DCollection::DetSet::const_iterator,SiStripMatchedRecHit2DCollection::DetSet::const_iterator> rechitmatchedRange = helper::getRange(*rechitsmatched, detid);
@@ -462,85 +301,10 @@ void SiStripRecHitsValid::analyze(const edm::Event& e, const edm::EventSetup& es
 
       for(itermatched=rechitmatchedRangeIteratorBegin; itermatched!=rechitmatchedRangeIteratorEnd;++itermatched){
 	SiStripMatchedRecHit2D const rechit=*itermatched;
-	LocalPoint position=rechit.localPosition();
-	LocalError error=rechit.localPositionError();
-	
-	double mindist = 999999;
-	double distx = 999999;
-	double disty = 999999;
-	double dist = 999999;
-	std::pair<LocalPoint,LocalVector> closestPair;
-	matched.clear();
-	//	const SiStripRecHit2D *mono = rechit.monoHit();
-	//	const SiStripRecHit2D *st = rechit.stereoHit();
-	//	LocalPoint monopos = mono->localPosition();
-	//	LocalPoint stpos   = st->localPosition();
-	
-	rechitmatchedx[k] = position.x();
-	rechitmatchedy[k] = position.y();
-	rechitmatchedz[k] = position.z();
-	rechitmatchederrxx[k] = error.xx();
-	rechitmatchederrxy[k] = error.xy();
-	rechitmatchederryy[k] = error.yy();
-
-	//	std::cout << " before association " << std::endl;
-	matched = associate.associateHit(rechit);
-	//std::cout << " after association size = " << matched.size() << std::endl;
-
-	if(!matched.empty()){
-	  //project simhit;
-	  const GluedGeomDet* gluedDet = (const GluedGeomDet*)tracker.idToDet(rechit.geographicalId());
-	  const StripGeomDetUnit* partnerstripdet =(StripGeomDetUnit*) gluedDet->stereoDet();
-	  std::pair<LocalPoint,LocalVector> hitPair;
-
-	  //std::cout << " RECHIT position = " << position << std::endl;	  
-	  
-	  for(vector<PSimHit>::const_iterator m=matched.begin(); m<matched.end(); m++){
-	    //project simhit;
-	    hitPair= projectHit((*m),partnerstripdet,gluedDet->surface());
-	    distx = fabs(rechitmatchedx[k] - hitPair.first.x());
-	    disty = fabs(rechitmatchedy[k] - hitPair.first.y());
-	    dist = sqrt(distx*distx+disty*disty);
-	    // std::cout << " Simhit position x = " << hitPair.first.x() 
-	    //      << " y = " << hitPair.first.y() << " dist = " << dist << std::endl;	  
-	    if(dist<mindist){
-	      mindist = dist;
-	      closestPair = hitPair;
-	    }
-	  }
-	  //std::cout << " Closest position x = " << closestPair.first.x() 
-	  //      << " y = " << closestPair.first.y() << " dist = " << dist << std::endl;	  
-	  rechitmatchedresx[k] = rechitmatchedx[k] - closestPair.first.x();
-	  rechitmatchedresy[k] = rechitmatchedy[k] - closestPair.first.y();
-
- 	  //chi2test compare rechit errors with the simhit position ( using null matrix for the simhit). 
- 	  //Can spot problems in the geometry better than a simple residual. (thanks to BorisM)
-
-	  AlgebraicVector  rhparameters(2);//= rechit.parameters();
-	  rhparameters[0] = position.x(); 
-	  rhparameters[1] = position.y();
- 	  LocalPoint sh = closestPair.first;
- 	  AlgebraicVector shparameters(2);
- 	  shparameters[0] = sh.x();
- 	  shparameters[1] = sh.y();
- 	  AlgebraicVector r(rhparameters - shparameters);
-	  AlgebraicSymMatrix R(2);//  = rechit.parametersError();
-	  R[0][0] = error.xx();
-	  R[0][1] = error.xy();
-	  R[1][1] = error.yy();
-	  int ierr; 
-	  R.invert(ierr); // if (ierr != 0) throw exception;
-	  double est = R.similarity(r);
-	  // 	  std::cout << " ====== Chi2 test matched ====== " << std::endl;
-	  // 	  std::cout << "RecHit param. = " << rhparameters << std::endl;
-	  // 	  std::cout << "RecHit errors = " << R << std::endl;
-	  // 	  std::cout << "SimHit param. = " << shparameters << std::endl;
-	  // 	  std::cout << " chi2  = " << est << std::endl;
-	  chi2matched[k2] = est;
-	  k2++;
-	}
-	
-	k++;
+	const GluedGeomDet* gluedDet = (const GluedGeomDet*)tracker.idToDet(rechit.geographicalId());
+	//analyze RecHits 
+	rechitanalysis_matched(rechit, gluedDet, associate);
+	rechitmatched.push_back(rechitpro);
       }
     }
     
@@ -552,81 +316,59 @@ void SiStripRecHitsValid::analyze(const edm::Event& e, const edm::EventSetup& es
     SiStripFolderOrganizer fold_organ;
     std::pair<std::string,int32_t> det_lay_pair = fold_organ.GetSubDetAndLayer(myid,tTopo,true);
   
-    if(numrechitrphi>0 || numrechitsas>0 || numrechitmatched){
+    if(numrechitrphi>0 || numrechitstereo>0 || numrechitmatched){
 
       totnumrechitrphi[det_lay_pair.first].push_back(numrechitrphi);
-      totnumrechitsas[det_lay_pair.first].push_back(numrechitsas);
+      totnumrechitstereo[det_lay_pair.first].push_back(numrechitstereo);
       totnumrechitmatched[det_lay_pair.first].push_back(numrechitmatched);
 
-      //Auxillary variables for the loops
-      int numrechitrphi1    = numrechitrphi;
-      int numrechitsas1     = numrechitsas;
-      int numrechitmatched1 = numrechitmatched;
-      int numrechitrphi2    = i2;
-      int numrechitsas2     = j2;
-      int numrechitmatched2 = k2;
-
-      std::map<std::string, LayerMEs>::iterator iLayerME  = LayerMEsMap.find(label);
-
-      for(int k = 0; k<numrechitrphi1; k++){
+      for (std::vector<RecHitProperties>::iterator irh=rechitrphi.begin(); irh!=rechitrphi.end(); ++irh) {
 	if(iLayerME != LayerMEsMap.end()){
-	  fillME(iLayerME->second.meNstprphi,clusizrphi[k]);
-	  fillME(iLayerME->second.meAdcrphi,cluchgrphi[k]);
-	  fillME(iLayerME->second.mePosxrphi,rechitrphix[k]);
-	  fillME(iLayerME->second.meErrxrphi,rechitrphierrx[k]);
-	  fillME(iLayerME->second.meResrphi,rechitrphires[k]);
-	  fillME(iLayerME->second.mePullLFrphi,rechitrphires[k]/sqrt(rechitrphierrx[k]));
-	  fillME(iLayerME->second.mePullMFrphi,rechitrphipullMF[k]);
-	}
-
-      }
-
-      for(int k = 0; k<numrechitrphi2; k++){
-	if(iLayerME != LayerMEsMap.end()){
-	  fillME(iLayerME->second.meChi2rphi,chi2rphi[k]);
-	}
-      }
-
-      for(int kk = 0; kk < numrechitsas1; kk++)	    
-	{
-	  if(iStereoAndMatchedME != StereoAndMatchedMEsMap.end()){
-	    fillME(iStereoAndMatchedME->second.meNstpSas,clusizsas[kk]);
-	    fillME(iStereoAndMatchedME->second.meAdcSas,cluchgsas[kk]);
-	    fillME(iStereoAndMatchedME->second.mePosxSas,rechitsasx[kk]);
-	    fillME(iStereoAndMatchedME->second.meErrxSas,sqrt(rechitsaserrx[kk]));
-	    fillME(iStereoAndMatchedME->second.meResSas,rechitsasres[kk]);
-	    fillME(iStereoAndMatchedME->second.mePullLFSas,rechitsasres[kk]/sqrt(rechitsaserrx[kk]));
-	    fillME(iStereoAndMatchedME->second.mePullMFSas,rechitsaspullMF[kk]);
+	  fillME(iLayerME->second.meNstprphi,(*irh).clusiz);
+	  fillME(iLayerME->second.meAdcrphi,(*irh).cluchg);
+	  fillME(iLayerME->second.mePosxrphi,(*irh).x);
+	  fillME(iLayerME->second.meErrxrphi,(*irh).errxx);
+	  if ( (*irh).resx != -999999. || (*irh).pullMF != -999999. || (*irh).chi2 != -999999. ){
+	    fillME(iLayerME->second.meResrphi,(*irh).resx);
+	    fillME(iLayerME->second.mePullLFrphi,(*irh).resx/sqrt((*irh).errxx));
+	    fillME(iLayerME->second.mePullMFrphi,(*irh).pullMF);
+	    fillME(iLayerME->second.meChi2rphi,(*irh).chi2);
 	  }
-	}	  
-      for(int l = 0; l<numrechitsas2; l++){
+	}
+      }
+      
+      
+      for (std::vector<RecHitProperties>::iterator irh=rechitstereo.begin(); irh!=rechitstereo.end(); ++irh) {
 	if(iStereoAndMatchedME != StereoAndMatchedMEsMap.end()){
-	  fillME(iStereoAndMatchedME->second.meChi2Sas,chi2sas[l]);
-	}
-      }
-
-      // }
-      if(numrechitmatched1>0){
-	for(int kkk = 0; kkk<numrechitmatched1; kkk++)
-	  {
-	    if(iStereoAndMatchedME != StereoAndMatchedMEsMap.end()){
-	      fillME(iStereoAndMatchedME->second.mePosxMatched,rechitmatchedx[kkk]);
-	      fillME(iStereoAndMatchedME->second.mePosyMatched,rechitmatchedy[kkk]);
-	      fillME(iStereoAndMatchedME->second.meErrxMatched,sqrt(rechitmatchederrxx[kkk]));
-	      fillME(iStereoAndMatchedME->second.meErryMatched,sqrt(rechitmatchederryy[kkk]));
-	      fillME(iStereoAndMatchedME->second.meResxMatched,rechitmatchedresx[kkk]);
-	      fillME(iStereoAndMatchedME->second.meResyMatched,rechitmatchedresy[kkk]);
-	    }
-	  }	  
-	for(int l = 0; l<numrechitmatched2; l++){
-	  if(iStereoAndMatchedME != StereoAndMatchedMEsMap.end()){
-	    fillME(iStereoAndMatchedME->second.meChi2Matched,chi2matched[l]);
+	  fillME(iStereoAndMatchedME->second.meNstpStereo,(*irh).clusiz);
+	  fillME(iStereoAndMatchedME->second.meAdcStereo,(*irh).cluchg);
+	  fillME(iStereoAndMatchedME->second.mePosxStereo,(*irh).x);
+	  fillME(iStereoAndMatchedME->second.meErrxStereo,sqrt((*irh).errxx));
+	  if ( (*irh).resx != -999999. || (*irh).pullMF != -999999. || (*irh).chi2 != -999999. ){
+	    fillME(iStereoAndMatchedME->second.meResStereo,(*irh).resx);
+	    fillME(iStereoAndMatchedME->second.mePullLFStereo,(*irh).resx/sqrt((*irh).errxx));
+	    fillME(iStereoAndMatchedME->second.mePullMFStereo,(*irh).pullMF);
+	    fillME(iStereoAndMatchedME->second.meChi2Stereo,(*irh).chi2);
 	  }
 	}
-
       }
-    }
 
+      for (std::vector<RecHitProperties>::iterator irh=rechitmatched.begin(); irh!=rechitmatched.end(); ++irh) {
+	if(iStereoAndMatchedME != StereoAndMatchedMEsMap.end()){
+	  fillME(iStereoAndMatchedME->second.mePosxMatched,(*irh).x);
+	  fillME(iStereoAndMatchedME->second.mePosyMatched,(*irh).y);
+	  fillME(iStereoAndMatchedME->second.meErrxMatched,sqrt((*irh).errxx));
+	  fillME(iStereoAndMatchedME->second.meErryMatched,sqrt((*irh).erryy));
+	  if ( (*irh).resx != -999999. || (*irh).resy != -999999. || (*irh).chi2 != -999999. ){
+	    fillME(iStereoAndMatchedME->second.meResxMatched,(*irh).resx);
+	    fillME(iStereoAndMatchedME->second.meResyMatched,(*irh).resy);
+	    fillME(iStereoAndMatchedME->second.meChi2Matched,(*irh).chi2);
+	  }
+	}
+      }
+
+    }
+    
   }//End of loop over detectors
   
 
@@ -635,12 +377,12 @@ void SiStripRecHitsValid::analyze(const edm::Event& e, const edm::EventSetup& es
   for (std::vector<std::string>::iterator iSubdet  = SubDetList_.begin(); iSubdet != SubDetList_.end(); iSubdet++){
     std::map<std::string, SubDetMEs>::iterator iSubDetME  = SubDetMEsMap.find((*iSubdet));
     fillME(iSubDetME->second.meNumrphi,std::accumulate(totnumrechitrphi[(*iSubdet)].rbegin(), totnumrechitrphi[(*iSubdet)].rend(), 0));
-    fillME(iSubDetME->second.meNumSas,std::accumulate(totnumrechitsas[(*iSubdet)].rbegin(), totnumrechitsas[(*iSubdet)].rend(), 0));
+    fillME(iSubDetME->second.meNumStereo,std::accumulate(totnumrechitstereo[(*iSubdet)].rbegin(), totnumrechitstereo[(*iSubdet)].rend(), 0));
     fillME(iSubDetME->second.meNumMatched,std::accumulate(totnumrechitmatched[(*iSubdet)].rbegin(), totnumrechitmatched[(*iSubdet)].rend(), 0));
   }
 
   fillME(totalMEs.meNumTotrphi,totrechitrphi);
-  fillME(totalMEs.meNumTotSas,totrechitsas);
+  fillME(totalMEs.meNumTotStereo,totrechitstereo);
   fillME(totalMEs.meNumTotMatched,totrechitmatched);
  
 }
@@ -675,6 +417,162 @@ std::pair<LocalPoint,LocalVector> SiStripRecHitsValid::projectHit( const PSimHit
   LocalVector localStripDir( plane.toLocal(stripDet->surface().toGlobal( stripDir)));
   
   return std::pair<LocalPoint,LocalVector>( projectedPos, localStripDir);
+}
+//--------------------------------------------------------------------------------------------
+void SiStripRecHitsValid::rechitanalysis(SiStripRecHit2D const rechit,const StripTopology &topol,TrackerHitAssociator associate){
+  
+  rechitpro.x = -999999.; rechitpro.y = -999999.; rechitpro.z = -999999.; rechitpro.errxx = -999999.; rechitpro.errxy = -999999.; 
+  rechitpro.erryy = -999999.; rechitpro.resx = -999999.; rechitpro.resy = -999999.;rechitpro.pullMF = -999999.; 
+  rechitpro.clusiz = -999999.; rechitpro.cluchg = -999999.; rechitpro.chi2 = -999999.;
+
+  LocalPoint position=rechit.localPosition();
+  LocalError error=rechit.localPositionError();
+  MeasurementPoint Mposition;
+  MeasurementError Merror;
+  Mposition = topol.measurementPosition(position);
+  Merror = topol.measurementError(position,error);
+  SiStripRecHit2D::ClusterRef clust=rechit.cluster();
+  int clusiz=0;
+  int totcharge=0;
+  clusiz = clust->amplitudes().size();
+  const std::vector<uint8_t> amplitudes=clust->amplitudes();
+  for(size_t ia=0; ia<amplitudes.size();ia++){
+    totcharge+=amplitudes[ia];
+  }
+  rechitpro.x = position.x();
+  rechitpro.y = position.y();
+  rechitpro.z = position.z();
+  rechitpro.errxx = error.xx();
+  rechitpro.errxy = error.xy();
+  rechitpro.erryy = error.yy();
+  rechitpro.clusiz = clusiz;
+  rechitpro.cluchg = totcharge;
+
+
+  matched.clear();
+  matched = associate.associateHit(rechit);
+
+  double mindist = 999999;
+  double dist = 999999;
+  PSimHit closest;
+  
+  if(!matched.empty()){
+
+    for(vector<PSimHit>::const_iterator m=matched.begin(); m<matched.end(); m++){
+      dist = fabs(rechitpro.x - (*m).localPosition().x());
+      if(dist<mindist){
+	mindist = dist;
+	closest = (*m);
+      }
+    }  
+    rechitpro.resx = rechitpro.x - closest.localPosition().x();
+    rechitpro.pullMF = (Mposition.x() - (topol.measurementPosition(closest.localPosition())).x())/sqrt(Merror.uu());
+    
+    //chi2test compare rechit errors with the simhit position ( using null matrix for the simhit). 
+    //Can spot problems in the geometry better than a simple residual. (thanks to BorisM)
+    AlgebraicVector  rhparameters(2);//= rechit.parameters();
+    rhparameters[0] = position.x(); 
+    rhparameters[1] = position.y();
+    AlgebraicVector shparameters(2);
+    shparameters[0] = closest.localPosition().x();
+    shparameters[1] = closest.localPosition().y();
+    AlgebraicVector r(rhparameters - shparameters);
+    AlgebraicSymMatrix R(2);//  = rechit.parametersError();
+    R[0][0] = error.xx();
+    R[0][1] = error.xy();
+    R[1][1] = error.yy();
+    int ierr; 
+    R.invert(ierr); // if (ierr != 0) throw exception;
+    double est = R.similarity(r);
+    // 	  std::cout << " ====== Chi2 test rphi hits ====== " << std::endl;
+    // 	  std::cout << "RecHit param. = " << rhparameters << std::endl;
+    // 	  std::cout << "RecHit errors = " << R << std::endl;
+    //	  std::cout << "SimHit param. = " << shparameters << std::endl;
+    //	  std::cout << " chi2  = " << est << std::endl;
+    //	  std::cout << "DEBUG BORIS,filling chi2rphi[i],i: " << i << std::endl;
+    rechitpro.chi2 = est;
+  }
+
+}
+
+
+//--------------------------------------------------------------------------------------------
+void SiStripRecHitsValid::rechitanalysis_matched(SiStripMatchedRecHit2D const rechit, const GluedGeomDet* gluedDet, TrackerHitAssociator associate){
+  
+  rechitpro.x = -999999.; rechitpro.y = -999999.; rechitpro.z = -999999.; rechitpro.errxx = -999999.; rechitpro.errxy = -999999.; 
+  rechitpro.erryy = -999999.; rechitpro.resx = -999999.; rechitpro.resy = -999999.;rechitpro.pullMF = -999999.; 
+  rechitpro.clusiz = -999999.; rechitpro.cluchg = -999999.; rechitpro.chi2 = -999999.;
+
+  LocalPoint position=rechit.localPosition();
+  LocalError error=rechit.localPositionError();
+
+  rechitpro.x = position.x();
+  rechitpro.y = position.y();
+  rechitpro.z = position.z();
+  rechitpro.errxx = error.xx();
+  rechitpro.errxy = error.xy();
+  rechitpro.erryy = error.yy();
+
+  matched.clear();
+  matched = associate.associateHit(rechit);
+
+  double mindist = 999999;
+  double dist = 999999;
+  double distx = 999999;
+  double disty = 999999;
+  std::pair<LocalPoint,LocalVector> closestPair;
+
+  if(!matched.empty()){
+
+    const StripGeomDetUnit* partnerstripdet =(StripGeomDetUnit*) gluedDet->stereoDet();
+    std::pair<LocalPoint,LocalVector> hitPair;
+    
+
+    for(vector<PSimHit>::const_iterator m=matched.begin(); m<matched.end(); m++){
+      //project simhit;
+	hitPair= projectHit((*m),partnerstripdet,gluedDet->surface());
+	distx = fabs(rechitpro.x - hitPair.first.x());
+	disty = fabs(rechitpro.y - hitPair.first.y());
+	dist = sqrt(distx*distx+disty*disty);
+	// std::cout << " Simhit position x = " << hitPair.first.x() 
+	//      << " y = " << hitPair.first.y() << " dist = " << dist << std::endl;
+	if(dist<mindist){
+	  mindist = dist;
+	  closestPair = hitPair;
+	}
+    }  
+    rechitpro.resx = rechitpro.x - closestPair.first.x();
+    rechitpro.resy = rechitpro.y - closestPair.first.y();
+    //std::cout << " Closest position x = " << closestPair.first.x() 
+    //      << " y = " << closestPair.first.y() << " dist = " << dist << std::endl;
+  
+    //chi2test compare rechit errors with the simhit position ( using null matrix for the simhit). 
+    //Can spot problems in the geometry better than a simple residual. (thanks to BorisM)
+    AlgebraicVector  rhparameters(2);//= rechit.parameters();
+    rhparameters[0] = position.x(); 
+    rhparameters[1] = position.y();
+    LocalPoint sh = closestPair.first;
+    AlgebraicVector shparameters(2);
+    shparameters[0] = sh.x();
+    shparameters[1] = sh.y();
+    AlgebraicVector r(rhparameters - shparameters);
+    AlgebraicSymMatrix R(2);//  = rechit.parametersError();
+    R[0][0] = error.xx();
+    R[0][1] = error.xy();
+    R[1][1] = error.yy();
+    int ierr; 
+    R.invert(ierr); // if (ierr != 0) throw exception;
+    double est = R.similarity(r);
+    // 	  std::cout << " ====== Chi2 test rphi hits ====== " << std::endl;
+    // 	  std::cout << "RecHit param. = " << rhparameters << std::endl;
+    // 	  std::cout << "RecHit errors = " << R << std::endl;
+    //	  std::cout << "SimHit param. = " << shparameters << std::endl;
+    //	  std::cout << " chi2  = " << est << std::endl;
+    //	  std::cout << "DEBUG BORIS,filling chi2rphi[i],i: " << i << std::endl;
+    rechitpro.chi2 = est;
+  }
+
+
 }
 
 //--------------------------------------------------------------------------------------------
@@ -743,7 +641,7 @@ void SiStripRecHitsValid::createMEs(const edm::EventSetup& es){
       LayerDetMap[label] = layerDetIds;
 
       // book Layer MEs 
-      // folder_organizer.setLayerFolder(detid,det_layer_pair.second,true);
+      //folder_organizer.setLayerFolder(detid,tTopo,det_layer_pair.second,true);
       curfold = topFolderName_ + det_layer_pair.first;
       folder_organizer.setSiStripFolderName(curfold);
       folder_organizer.setSiStripFolder();
@@ -803,7 +701,7 @@ void SiStripRecHitsValid::createMEs(const edm::EventSetup& es){
 void SiStripRecHitsValid::createTotalMEs() 
 {
   totalMEs.meNumTotrphi = 0;
-  totalMEs.meNumTotSas = 0;
+  totalMEs.meNumTotStereo = 0;
   totalMEs.meNumTotMatched = 0;
 
   //NumTotrphi
@@ -811,10 +709,10 @@ void SiStripRecHitsValid::createTotalMEs()
     totalMEs.meNumTotrphi = bookME1D("TH1NumTotrphi", "TH1NumTotrphi" ,"Num of RecHits");
     totalMEs.meNumTotrphi->setAxisTitle("Total number of RecHits");
   }
-  //NumTotSas
-  if(switchNumTotSas) {
-    totalMEs.meNumTotSas = bookME1D("TH1NumTotSas", "TH1NumTotSas","Num of RecHits sas");
-    totalMEs.meNumTotSas ->setAxisTitle("Total number of RecHits (stereo)");
+  //NumTotStereo
+  if(switchNumTotStereo) {
+    totalMEs.meNumTotStereo = bookME1D("TH1NumTotStereo", "TH1NumTotStereo","Num of RecHits stereo");
+    totalMEs.meNumTotStereo ->setAxisTitle("Total number of RecHits (stereo)");
   }
   //NumTotMatched
   if(switchNumTotMatched) {
@@ -888,14 +786,14 @@ void SiStripRecHitsValid::createStereoAndMatchedMEs(std::string label)
   SiStripHistoId hidmanager;
   StereoAndMatchedMEs stereoandmatchedMEs; 
 
-  stereoandmatchedMEs.meNstpSas = 0;
-  stereoandmatchedMEs.meAdcSas = 0;
-  stereoandmatchedMEs.mePosxSas = 0;
-  stereoandmatchedMEs.meErrxSas = 0;
-  stereoandmatchedMEs.meResSas = 0;
-  stereoandmatchedMEs.mePullLFSas = 0;
-  stereoandmatchedMEs.mePullMFSas = 0;
-  stereoandmatchedMEs.meChi2Sas = 0;
+  stereoandmatchedMEs.meNstpStereo = 0;
+  stereoandmatchedMEs.meAdcStereo = 0;
+  stereoandmatchedMEs.mePosxStereo = 0;
+  stereoandmatchedMEs.meErrxStereo = 0;
+  stereoandmatchedMEs.meResStereo = 0;
+  stereoandmatchedMEs.mePullLFStereo = 0;
+  stereoandmatchedMEs.mePullMFStereo = 0;
+  stereoandmatchedMEs.meChi2Stereo = 0;
   stereoandmatchedMEs.mePosxMatched = 0;
   stereoandmatchedMEs.mePosyMatched = 0;
   stereoandmatchedMEs.meErrxMatched = 0;
@@ -904,45 +802,45 @@ void SiStripRecHitsValid::createStereoAndMatchedMEs(std::string label)
   stereoandmatchedMEs.meResyMatched = 0;
   stereoandmatchedMEs.meChi2Matched = 0;
 
-  //NstpSas
-  if(switchNstpSas) {
-    stereoandmatchedMEs.meNstpSas = bookME1D("TH1NstpSas", hidmanager.createHistoLayer("Nstp_sas","layer",label,"").c_str() ,"Cluster Width - Number of strips that belong to the RecHit cluster");  
-    stereoandmatchedMEs.meNstpSas->setAxisTitle(("Cluster Width [nr strips] in stereo modules in "+ label).c_str());
+  //NstpStereo
+  if(switchNstpStereo) {
+    stereoandmatchedMEs.meNstpStereo = bookME1D("TH1NstpStereo", hidmanager.createHistoLayer("Nstp_stereo","layer",label,"").c_str() ,"Cluster Width - Number of strips that belong to the RecHit cluster");  
+    stereoandmatchedMEs.meNstpStereo->setAxisTitle(("Cluster Width [nr strips] in stereo modules in "+ label).c_str());
   }
-  //AdcSas
-  if(switchAdcSas) {
-    stereoandmatchedMEs.meAdcSas = bookME1D("TH1AdcSas", hidmanager.createHistoLayer("Adc_sas","layer",label,"").c_str() ,"RecHit Cluster Charge"); 
-    stereoandmatchedMEs.meAdcSas->setAxisTitle(("cluster charge [ADC] in stereo modules in " + label).c_str());
+  //AdcStereo
+  if(switchAdcStereo) {
+    stereoandmatchedMEs.meAdcStereo = bookME1D("TH1AdcStereo", hidmanager.createHistoLayer("Adc_stereo","layer",label,"").c_str() ,"RecHit Cluster Charge"); 
+    stereoandmatchedMEs.meAdcStereo->setAxisTitle(("cluster charge [ADC] in stereo modules in " + label).c_str());
   }
-  //PosxSas
-  if(switchPosxSas) {
-    stereoandmatchedMEs.mePosxSas = bookME1D("TH1PosxSas", hidmanager.createHistoLayer("Posx_sas","layer",label,"").c_str() ,"RecHit x coord."); 
-    stereoandmatchedMEs.mePosxSas->setAxisTitle(("x RecHit coord. (local frame) in stereo modules in " + label).c_str());
+  //PosxStereo
+  if(switchPosxStereo) {
+    stereoandmatchedMEs.mePosxStereo = bookME1D("TH1PosxStereo", hidmanager.createHistoLayer("Posx_stereo","layer",label,"").c_str() ,"RecHit x coord."); 
+    stereoandmatchedMEs.mePosxStereo->setAxisTitle(("x RecHit coord. (local frame) in stereo modules in " + label).c_str());
   }
-  //ErrxSas
-  if(switchErrxSas) {
-    stereoandmatchedMEs.meErrxSas = bookME1D("TH1ErrxSas", hidmanager.createHistoLayer("Errx_sas","layer",label,"").c_str() ,"RecHit err(x) coord.");  
-    stereoandmatchedMEs.meErrxSas->setAxisTitle(("err(x) RecHit coord. (local frame) in stereo modules in " + label).c_str());
+  //ErrxStereo
+  if(switchErrxStereo) {
+    stereoandmatchedMEs.meErrxStereo = bookME1D("TH1ErrxStereo", hidmanager.createHistoLayer("Errx_stereo","layer",label,"").c_str() ,"RecHit err(x) coord.");  
+    stereoandmatchedMEs.meErrxStereo->setAxisTitle(("err(x) RecHit coord. (local frame) in stereo modules in " + label).c_str());
   }
-  //ResSas
-  if(switchResSas) {
-    stereoandmatchedMEs.meResSas = bookME1D("TH1ResSas", hidmanager.createHistoLayer("Res_sas","layer",label,"").c_str() ,"Residuals of the hit x coordinate"); 
-    stereoandmatchedMEs.meResSas->setAxisTitle(("RecHit Res(x) in stereo modules in " + label).c_str());
+  //ResStereo
+  if(switchResStereo) {
+    stereoandmatchedMEs.meResStereo = bookME1D("TH1ResStereo", hidmanager.createHistoLayer("Res_stereo","layer",label,"").c_str() ,"Residuals of the hit x coordinate"); 
+    stereoandmatchedMEs.meResStereo->setAxisTitle(("RecHit Res(x) in stereo modules in " + label).c_str());
   }
-  //PullLFSas
-  if(switchPullLFSas) {
-    stereoandmatchedMEs.mePullLFSas = bookME1D("TH1PullLFSas", hidmanager.createHistoLayer("Pull_LF_sas","layer",label,"").c_str() ,"Pull distribution");  
-    stereoandmatchedMEs.mePullLFSas->setAxisTitle(("Pull distribution (local frame) in stereo modules in " + label).c_str());
+  //PullLFStereo
+  if(switchPullLFStereo) {
+    stereoandmatchedMEs.mePullLFStereo = bookME1D("TH1PullLFStereo", hidmanager.createHistoLayer("Pull_LF_stereo","layer",label,"").c_str() ,"Pull distribution");  
+    stereoandmatchedMEs.mePullLFStereo->setAxisTitle(("Pull distribution (local frame) in stereo modules in " + label).c_str());
   }
-  //PullMFSas
-  if(switchPullMFSas) {
-    stereoandmatchedMEs.mePullMFSas = bookME1D("TH1PullMFSas", hidmanager.createHistoLayer("Pull_MF_sas","layer",label,"").c_str() ,"Pull distribution");  
-    stereoandmatchedMEs.mePullMFSas->setAxisTitle(("Pull distribution (measurement frame) in stereo modules in " + label).c_str());
+  //PullMFStereo
+  if(switchPullMFStereo) {
+    stereoandmatchedMEs.mePullMFStereo = bookME1D("TH1PullMFStereo", hidmanager.createHistoLayer("Pull_MF_stereo","layer",label,"").c_str() ,"Pull distribution");  
+    stereoandmatchedMEs.mePullMFStereo->setAxisTitle(("Pull distribution (measurement frame) in stereo modules in " + label).c_str());
   }
-  //Chi2Sas
-  if(switchChi2Sas) {
-    stereoandmatchedMEs.meChi2Sas = bookME1D("TH1Chi2Sas", hidmanager.createHistoLayer("Chi2_sas","layer",label,"").c_str() ,"RecHit Chi2 test");  
-    stereoandmatchedMEs.meChi2Sas->setAxisTitle(("RecHit Chi2 test in stereo modules in " + label).c_str()); 
+  //Chi2Stereo
+  if(switchChi2Stereo) {
+    stereoandmatchedMEs.meChi2Stereo = bookME1D("TH1Chi2Stereo", hidmanager.createHistoLayer("Chi2_stereo","layer",label,"").c_str() ,"RecHit Chi2 test");  
+    stereoandmatchedMEs.meChi2Stereo->setAxisTitle(("RecHit Chi2 test in stereo modules in " + label).c_str()); 
   }
   //PosxMatched
   if(switchPosxMatched) {
@@ -988,7 +886,7 @@ void SiStripRecHitsValid::createSubDetMEs(std::string label) {
 
   SubDetMEs subdetMEs;
   subdetMEs.meNumrphi = 0;
-  subdetMEs.meNumSas = 0;
+  subdetMEs.meNumStereo = 0;
   subdetMEs.meNumMatched = 0;
 
   std::string HistoName;
@@ -998,11 +896,11 @@ void SiStripRecHitsValid::createSubDetMEs(std::string label) {
     subdetMEs.meNumrphi = bookME1D("TH1Numrphi",HistoName.c_str(),"Num of RecHits");
     subdetMEs.meNumrphi->setAxisTitle(("Total number of RecHits in "+ label).c_str());
   }  
-  //NumSas
-  if (switchNumSas){
-    HistoName = "TH1NumSas__" + label;
-    subdetMEs.meNumSas = bookME1D("TH1NumSas",HistoName.c_str(),"Num of RecHits in stereo modules");
-    subdetMEs.meNumSas->setAxisTitle(("Total number of RecHits in stereo modules in "+ label).c_str());
+  //NumStereo
+  if (switchNumStereo){
+    HistoName = "TH1NumStereo__" + label;
+    subdetMEs.meNumStereo = bookME1D("TH1NumStereo",HistoName.c_str(),"Num of RecHits in stereo modules");
+    subdetMEs.meNumStereo->setAxisTitle(("Total number of RecHits in stereo modules in "+ label).c_str());
   }  
   //NumMatched
   if (switchNumMatched){

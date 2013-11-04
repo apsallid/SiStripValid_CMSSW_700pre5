@@ -13,7 +13,7 @@ stripRecHitsValid = cms.EDAnalyzer("SiStripRecHitsValid",
         switchon  = cms.bool(True)
    ),
 
-    TH1NumTotSas = cms.PSet(
+    TH1NumTotStereo = cms.PSet(
         Nbinx          = cms.int32(100),
         xmin           = cms.double(0.),
         xmax           = cms.double(10000.),
@@ -36,7 +36,7 @@ stripRecHitsValid = cms.EDAnalyzer("SiStripRecHitsValid",
 
     ),
 
-  TH1NumSas = cms.PSet(
+  TH1NumStereo = cms.PSet(
         Nbinx          = cms.int32(100),
         xmin           = cms.double(0.),
         xmax           = cms.double(1000.),
@@ -108,56 +108,56 @@ stripRecHitsValid = cms.EDAnalyzer("SiStripRecHitsValid",
         switchon  = cms.bool(True)
     ),
 
-    TH1NstpSas = cms.PSet( 
+    TH1NstpStereo = cms.PSet( 
         Nbinx          = cms.int32(20),
         xmin           = cms.double(-0.5),
         xmax           = cms.double(19.5),
         switchon  = cms.bool(True)
     ),
 
-    TH1AdcSas = cms.PSet( 
+    TH1AdcStereo = cms.PSet( 
         Nbinx          = cms.int32(100),
         xmin           = cms.double(0.),
         xmax           = cms.double(500.),#300
         switchon  = cms.bool(True)
     ),
 
-   TH1PosxSas = cms.PSet( 
+   TH1PosxStereo = cms.PSet( 
         Nbinx          = cms.int32(100),
         xmin           = cms.double(-6.0),
         xmax           = cms.double(+6.0),
         switchon  = cms.bool(True)
     ),
 
-   TH1ErrxSas = cms.PSet( 
+   TH1ErrxStereo = cms.PSet( 
         Nbinx          = cms.int32(100),
         xmin           = cms.double(0.),
         xmax           = cms.double(0.1),#0.01
         switchon  = cms.bool(True)
     ),
 
-   TH1ResSas = cms.PSet( 
+   TH1ResStereo = cms.PSet( 
         Nbinx          = cms.int32(100),
         xmin           = cms.double(-0.10),#-0.02
         xmax           = cms.double(+0.10),#+0.02
         switchon  = cms.bool(True)
     ),
 
-   TH1PullLFSas = cms.PSet( 
+   TH1PullLFStereo = cms.PSet( 
         Nbinx          = cms.int32(100),
         xmin           = cms.double(-4.),
         xmax           = cms.double(+4.),
         switchon  = cms.bool(True)
     ),
 
-   TH1PullMFSas = cms.PSet( 
+   TH1PullMFStereo = cms.PSet( 
         Nbinx          = cms.int32(100),
         xmin           = cms.double(-10.),#-4.0
         xmax           = cms.double(+10.),#+4.0
         switchon  = cms.bool(True)
     ),
 
-   TH1Chi2Sas = cms.PSet( 
+   TH1Chi2Stereo = cms.PSet( 
         Nbinx          = cms.int32(100),
         xmin           = cms.double(0.),
         xmax           = cms.double(100.),#50

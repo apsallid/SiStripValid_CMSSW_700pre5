@@ -64,13 +64,13 @@ class SiStripRecHitsValid : public edm::EDAnalyzer {
  
   struct TotalMEs{ // MEs for total detector Level
     MonitorElement*  meNumTotrphi;
-    MonitorElement*  meNumTotSas;
+    MonitorElement*  meNumTotStereo;
     MonitorElement*  meNumTotMatched;
   };
  
   struct SubDetMEs{ // MEs for Subdetector Level
     MonitorElement*  meNumrphi;
-    MonitorElement*  meNumSas;
+    MonitorElement*  meNumStereo;
     MonitorElement*  meNumMatched;
   };
 
@@ -87,14 +87,14 @@ class SiStripRecHitsValid : public edm::EDAnalyzer {
   };
 
   struct StereoAndMatchedMEs{ // MEs for Layer Level
-    MonitorElement* meNstpSas;
-    MonitorElement* meAdcSas;
-    MonitorElement* mePosxSas;
-    MonitorElement* meErrxSas;
-    MonitorElement* meResSas;
-    MonitorElement* mePullLFSas;
-    MonitorElement* mePullMFSas;
-    MonitorElement* meChi2Sas;
+    MonitorElement* meNstpStereo;
+    MonitorElement* meAdcStereo;
+    MonitorElement* mePosxStereo;
+    MonitorElement* meErrxStereo;
+    MonitorElement* meResStereo;
+    MonitorElement* mePullLFStereo;
+    MonitorElement* mePullMFStereo;
+    MonitorElement* meChi2Stereo;
     MonitorElement* mePosxMatched;
     MonitorElement* mePosyMatched;
     MonitorElement* meErrxMatched;
@@ -104,6 +104,22 @@ class SiStripRecHitsValid : public edm::EDAnalyzer {
     MonitorElement* meChi2Matched;
 
   };
+
+  struct RecHitProperties{ 
+    float x;
+    float y;
+    float z;
+    float errxx;
+    float errxy;
+    float erryy;
+    float resx;
+    float resy;
+    float pullMF;
+    int clusiz;
+    float cluchg;
+    float chi2;
+  };
+
 
  protected:
 
@@ -120,12 +136,12 @@ class SiStripRecHitsValid : public edm::EDAnalyzer {
   TotalMEs totalMEs;
 
   bool switchNumTotrphi;
-  bool switchNumTotSas;
+  bool switchNumTotStereo;
   bool switchNumTotMatched;
 
 
   bool switchNumrphi;
-  bool switchNumSas;
+  bool switchNumStereo;
   bool switchNumMatched;
 
 
@@ -137,14 +153,14 @@ class SiStripRecHitsValid : public edm::EDAnalyzer {
   bool switchPullLFrphi;
   bool switchPullMFrphi;
   bool switchChi2rphi;
-  bool switchNstpSas;
-  bool switchAdcSas;
-  bool switchPosxSas;
-  bool switchErrxSas;
-  bool switchResSas;
-  bool switchPullLFSas;
-  bool switchPullMFSas;
-  bool switchChi2Sas;
+  bool switchNstpStereo;
+  bool switchAdcStereo;
+  bool switchPosxStereo;
+  bool switchErrxStereo;
+  bool switchResStereo;
+  bool switchPullLFStereo;
+  bool switchPullMFStereo;
+  bool switchChi2Stereo;
   bool switchPosxMatched;
   bool switchPosyMatched;
   bool switchErrxMatched;
@@ -185,38 +201,47 @@ class SiStripRecHitsValid : public edm::EDAnalyzer {
   edm::ParameterSet Parameters;
   //const StripTopology* topol;
 
-  static const int MAXHIT = 1000;
-  float rechitrphix[MAXHIT];
-  float rechitrphierrx[MAXHIT];
-  float rechitrphiy[MAXHIT];
-  float rechitrphiz[MAXHIT];
-  float rechitrphiphi[MAXHIT];
-  float rechitrphires[MAXHIT];
-  float rechitrphipullMF[MAXHIT];
-  int   clusizrphi[MAXHIT];
-  float cluchgrphi[MAXHIT];
-  float rechitsasx[MAXHIT];
-  float rechitsaserrx[MAXHIT];
-  float rechitsasy[MAXHIT];
-  float rechitsasz[MAXHIT];
-  float rechitsasphi[MAXHIT];
-  float rechitsasres[MAXHIT];
-  float rechitsaspullMF[MAXHIT];
-  int   clusizsas[MAXHIT];
-  float cluchgsas[MAXHIT];
-  float chi2rphi[MAXHIT];
-  float chi2sas[MAXHIT];
-  float chi2matched[MAXHIT];
-  float rechitmatchedx[MAXHIT];
-  float rechitmatchedy[MAXHIT];
-  float rechitmatchedz[MAXHIT];
-  float rechitmatchederrxx[MAXHIT];
-  float rechitmatchederrxy[MAXHIT];
-  float rechitmatchederryy[MAXHIT];
-  float rechitmatchedphi[MAXHIT];
-  float rechitmatchedresx[MAXHIT];
-  float rechitmatchedresy[MAXHIT];
-  float rechitmatchedchi2[MAXHIT];
+  /* static const int MAXHIT = 1000; */
+
+  std::vector<RecHitProperties> rechitrphi;
+  std::vector<RecHitProperties> rechitstereo;
+  std::vector<RecHitProperties> rechitmatched;
+  RecHitProperties rechitpro;
+
+  void rechitanalysis(SiStripRecHit2D const rechit,const StripTopology &topol, TrackerHitAssociator associate);
+  void rechitanalysis_matched(SiStripMatchedRecHit2D const rechit, const GluedGeomDet* gluedDet, TrackerHitAssociator associate);
+  
+  /* float rechitrphix[MAXHIT]; */
+  /* float rechitrphierrx[MAXHIT]; */
+  /* float rechitrphiy[MAXHIT]; */
+  /* float rechitrphiz[MAXHIT]; */
+  /* float rechitrphires[MAXHIT]; */
+  /* float rechitrphipullMF[MAXHIT]; */
+  /* int   clusizrphi[MAXHIT]; */
+  /* float cluchgrphi[MAXHIT]; */
+  /* float chi2rphi[MAXHIT]; */
+
+  /* float rechitstereox[MAXHIT]; */
+  /* float rechitstereoerrx[MAXHIT]; */
+  /* float rechitstereoy[MAXHIT]; */
+  /* float rechitstereoz[MAXHIT]; */
+  /* float rechitstereores[MAXHIT]; */
+  /* float rechitstereopullMF[MAXHIT]; */
+  /* int   clusizstereo[MAXHIT]; */
+  /* float cluchgstereo[MAXHIT]; */
+  /* float chi2stereo[MAXHIT]; */
+
+  /* float chi2matched[MAXHIT]; */
+  /* float rechitmatchedx[MAXHIT]; */
+  /* float rechitmatchedy[MAXHIT]; */
+  /* float rechitmatchedz[MAXHIT]; */
+  /* float rechitmatchederrxx[MAXHIT]; */
+  /* float rechitmatchederrxy[MAXHIT]; */
+  /* float rechitmatchederryy[MAXHIT]; */
+  /* float rechitmatchedphi[MAXHIT]; */
+  /* float rechitmatchedresx[MAXHIT]; */
+  /* float rechitmatchedresy[MAXHIT]; */
+  /* float rechitmatchedchi2[MAXHIT]; */
 
   //edm::InputTag matchedRecHits_, rphiRecHits_, stereoRecHits_; 
   edm::EDGetTokenT<SiStripMatchedRecHit2DCollection> matchedRecHitsToken_;
