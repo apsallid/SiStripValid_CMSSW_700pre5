@@ -312,7 +312,7 @@ void SiStripRecHitsValid::analyze(const edm::Event& e, const edm::EventSetup& es
     std::string label = hidmanager.getSubdetid(myid,tTopo,true);
     std::map<std::string, LayerMEs>::iterator iLayerME  = LayerMEsMap.find(label);
     std::map<std::string, StereoAndMatchedMEs>::iterator iStereoAndMatchedME  = StereoAndMatchedMEsMap.find(label);
-    // std::cout << "label " << label << endl;
+    std::cout << "label " << label << endl;
     SiStripFolderOrganizer fold_organ;
     std::pair<std::string,int32_t> det_lay_pair = fold_organ.GetSubDetAndLayer(myid,tTopo,true);
   
@@ -641,15 +641,17 @@ void SiStripRecHitsValid::createMEs(const edm::EventSetup& es){
       LayerDetMap[label] = layerDetIds;
 
       // book Layer MEs 
-      //folder_organizer.setLayerFolder(detid,tTopo,det_layer_pair.second,true);
-      curfold = topFolderName_ + det_layer_pair.first;
-      folder_organizer.setSiStripFolderName(curfold);
-      folder_organizer.setSiStripFolder();
-      // std::cout << "curfold " << curfold << std::endl;
-      createLayerMEs(label);
+      folder_organizer.setLayerFolder(detid,tTopo,det_layer_pair.second,true);
+      // std::stringstream ss;
+      // folder_organizer.getLayerFolderName(ss, detid, tTopo, true); 
+      // std::cout << "Folder Name " << ss.str().c_str() << std::endl;
+       createLayerMEs(label);
     }
-    // book sub-detector plots in the same folder for now
+    // book sub-detector plots 
+    std::pair<std::string,std::string> sdet_pair = folder_organizer.getSubDetFolderAndTag(detid, tTopo);
+    // std::cout << "sdet_pair " << sdet_pair.first << " " << sdet_pair.second << std::endl;
     if (SubDetMEsMap.find(det_layer_pair.first) == SubDetMEsMap.end()){
+      dbe_->setCurrentFolder(sdet_pair.first);
       createSubDetMEs(det_layer_pair.first);        
     }
     //Create StereoAndMatchedMEs
@@ -682,14 +684,13 @@ void SiStripRecHitsValid::createMEs(const edm::EventSetup& es){
       }
       StereoAndMatchedDetMap[label] = stereoandmatchedDetIds;
 
-      // book StereoAndMatched MEs 
-      // folder_organizer.setLayerFolder(detid,det_layer_pair.second,true);
-      curfold = topFolderName_ + det_layer_pair.first;
-      folder_organizer.setSiStripFolderName(curfold);
-      folder_organizer.setSiStripFolder();
-      // std::cout << "curfold " << curfold << std::endl;
-      //Create the Monitor Elements only when we have a stereo module
       if(isStereo){
+	//book StereoAndMatched MEs 
+	folder_organizer.setLayerFolder(detid,tTopo,det_layer_pair.second,true);
+	// std::stringstream ss1;
+	// folder_organizer.getLayerFolderName(ss1, detid, tTopo, true);  
+	// std::cout << "Folder Name stereo " <<  ss1.str().c_str() << std::endl;
+	//Create the Monitor Elements only when we have a stereo module
 	createStereoAndMatchedMEs(label);
       }
     }

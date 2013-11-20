@@ -184,7 +184,7 @@ class SiStripTrackingRecHitsValid : public edm::EDAnalyzer
 
   };
 
-   struct StereoAndMatchedMEs{ // MEs for stereo and matched hits
+  struct StereoAndMatchedMEs{ // MEs for stereo and matched hits
       
     MonitorElement* meNstpSas;
     MonitorElement* meAdcSas;
@@ -224,9 +224,34 @@ class SiStripTrackingRecHitsValid : public edm::EDAnalyzer
     MonitorElement* mePullxMatched;
     MonitorElement* mePullyMatched;
 
-   };
+  };
 
- 
+  struct RecHitProperties{ 
+    float x;
+    float y;
+    float z;
+    float errxx; 
+    float errxy; 
+    float erryy; 
+    float errxxMF; // in Measurement Frame
+    float phi;
+    float resx;
+    float resy;
+    float resxMF;// in Measurement Frame
+    float pullx;
+    float pully;
+    float pullxMF;// in Measurement Frame
+    float trackangle;
+    float trackanglebeta;
+    float trackangle2;
+    float trackwidth;
+    int   expectedwidth;
+    int   category;
+    float  thickness;
+    int   clusiz;
+    float cluchg;
+  };
+
  protected:
 
   virtual void analyze(const edm::Event& e, const edm::EventSetup& c);
@@ -368,6 +393,7 @@ class SiStripTrackingRecHitsValid : public edm::EDAnalyzer
   bool layerswitchPullyMatched;
 
   SimpleHitsMEs simplehitsMEs;
+  std::vector<PSimHit> matched;
   std::map<std::string, LayerMEs> LayerMEsMap;
   std::map<std::string, StereoAndMatchedMEs> StereoAndMatchedMEsMap;
   std::map<std::string, std::vector< uint32_t > > LayerDetMap;
@@ -400,63 +426,15 @@ class SiStripTrackingRecHitsValid : public edm::EDAnalyzer
   edm::ParameterSet Parameters;
 
   //const StripTopology* topol;
+  std::vector<RecHitProperties> rechitrphi;
+  std::vector<RecHitProperties> rechitstereo;
+  std::vector<RecHitProperties> rechitmatched;
+  RecHitProperties rechitpro;
 
-  float rechitrphix;
-  float rechitrphierrx;
-  float rechitrphierrxLF;
-  float rechitrphierrxMF;
-  float rechitrphiy;
-  float rechitrphiz;
-  float rechitrphiphi;
-  float rechitrphires;
-  float rechitrphiresLF;
-  float rechitrphiresMF;
-  float rechitrphipull;
-  float rechitrphipullLF;
-  float rechitrphipullMF;
-  float rechitrphitrackangle;
-  float rechitrphitrackanglebeta;
-  float rechitrphitrackangle2;
-  float rechitrphitrackwidth;
-  int rechitrphiexpectedwidth;
-  int rechitrphicategory;
-  int   clusizrphi;
-  float cluchgrphi;
-  float rechitsasx;
-  float rechitsaserrx;
-  float rechitsaserrxLF;
-  float rechitsaserrxMF;
-  float rechitsasy;
-  float rechitsasz;
-  float rechitsasphi;
-  float rechitsasres;
-  float rechitsasresLF;
-  float rechitsasresMF;
-  float rechitsaspull;
-  float rechitsaspullLF;
-  float rechitsaspullMF;
-  float rechitsastrackangle;
-  float rechitsastrackanglebeta;
-  float rechitsastrackwidth;
-  int rechitsasexpectedwidth;
-  int rechitsascategory;
-  float  rechitrphithickness;
-  float  rechitsasthickness;
-
-  int   clusizsas;
-  float cluchgsas;
-  float rechitmatchedx;
-  float rechitmatchedy;
-  float rechitmatchedz;
-  float rechitmatchederrxx;
-  float rechitmatchederrxy;
-  float rechitmatchederryy;
-  float rechitmatchedphi;
-  float rechitmatchedresx;
-  float rechitmatchedresy;
-  float rechitmatchedpullx;
-  float rechitmatchedpully;
-  float rechitmatchedtrackangle;
+  void rechitanalysis(TrajectoryStateOnSurface tsos, const TransientTrackingRecHit::ConstRecHitPointer thit, const StripGeomDetUnit *stripdet, edm::ESHandle < StripClusterParameterEstimator > stripcpe, TrackerHitAssociator associate,  bool simplehit1or2D);
+  
+  void rechitanalysis_matched(TrajectoryStateOnSurface tsos, const TransientTrackingRecHit::ConstRecHitPointer thit, const GluedGeomDet* gluedDet,TrackerHitAssociator associate, edm::ESHandle < StripClusterParameterEstimator > stripcpe, bool matchedmonorstereo);
+ 
 
   float track_rapidity;
   //edm::InputTag trajectoryInput_;

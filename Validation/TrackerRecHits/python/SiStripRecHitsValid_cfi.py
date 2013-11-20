@@ -4,7 +4,7 @@ stripRecHitsValid = cms.EDAnalyzer("SiStripRecHitsValid",
 #    outputFile = cms.untracked.string('sistriprechitshisto.root'),
     outputFile = cms.string('striptrackingrechitshisto.root'),
     OutputMEsInRootFile = cms.bool(True),
-    TopFolderName = cms.string('SiStrip/RecHitsValidation/StiffTrackingRecHits/'),
+    TopFolderName = cms.string('SiStrip/RecHitsValidation/StiffTrackingRecHits'),
 
     TH1NumTotrphi = cms.PSet(
         Nbinx          = cms.int32(100),
