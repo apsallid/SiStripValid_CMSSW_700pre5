@@ -555,17 +555,19 @@ void SiStripTrackingRecHitsValid::analyze(const edm::Event & e, const edm::Event
       // std::cout<< "label " << label << " and id " << detid.subdetId() << std::endl;
 
       StripSubdetector StripSubdet = (StripSubdetector) detid;
+      //Variable to define the case we are dealing with
+      std::string matchedmonorstereo;
 
       isrechitmatched = 0;
-
+  
       if (matchedhit) {
-
-	isrechitmatched = 1;
+	
+  	isrechitmatched = 1;
 	const GluedGeomDet *gluedDet = (const GluedGeomDet *) tracker.idToDet(matchedhit->geographicalId());
 	//Analysis
-	//The bool here is helpful for the later cases of simple hits from matched hits. 
-	rechitanalysis_matched(tsos, thit2, gluedDet, associate, stripcpe, true);
-	rechitmatched.push_back(rechitpro);
+	matchedmonorstereo = "matched";
+	rechitanalysis_matched(tsos, thit2, gluedDet, associate, stripcpe, matchedmonorstereo );
+	// rechitmatched.push_back(rechitpro);
 
       }
 
@@ -613,7 +615,8 @@ void SiStripTrackingRecHitsValid::analyze(const edm::Event & e, const edm::Event
 	  isrechitrphi = 1;
 	  
 	  //Analysis
-	  rechitanalysis_matched(tsos, thit2, gdet, associate, stripcpe, true);
+	  matchedmonorstereo = "monoHit";
+	  rechitanalysis_matched(tsos, thit2, gdet, associate, stripcpe, matchedmonorstereo );
 
 	}
 
@@ -625,7 +628,8 @@ void SiStripTrackingRecHitsValid::analyze(const edm::Event & e, const edm::Event
 	  isrechitsas = 1;
 	  
 	  //Analysis
-	  rechitanalysis_matched(tsos, thit2, gdet, associate, stripcpe, false);
+	  matchedmonorstereo = "stereoHit";
+	  rechitanalysis_matched(tsos, thit2, gdet, associate, stripcpe, matchedmonorstereo );
 	}
       }
       
@@ -982,7 +986,7 @@ std::pair < LocalPoint, LocalVector > SiStripTrackingRecHitsValid::projectHit(co
   return std::pair < LocalPoint, LocalVector > (projectedPos, localStripDir);
 }
 //--------------------------------------------------------------------------------------------
-void SiStripTrackingRecHitsValid::rechitanalysis_matched(TrajectoryStateOnSurface tsos, const TransientTrackingRecHit::ConstRecHitPointer thit, const GluedGeomDet* gluedDet, TrackerHitAssociator associate, edm::ESHandle<StripClusterParameterEstimator> stripcpe, bool matchedmonorstereo){
+void SiStripTrackingRecHitsValid::rechitanalysis_matched(TrajectoryStateOnSurface tsos, const TransientTrackingRecHit::ConstRecHitPointer thit, const GluedGeomDet* gluedDet, TrackerHitAssociator associate, edm::ESHandle<StripClusterParameterEstimator> stripcpe, std::string matchedmonorstereo){
   
   rechitpro.x = -999999.; rechitpro.y = -999999.; rechitpro.z = -999999.; rechitpro.errxx = -999999.; rechitpro.errxy = -999999.;   rechitpro.erryy = -999999.; 
   rechitpro.errxxMF = -999999.; rechitpro.phi = -999999.;rechitpro.resx = -999999.; rechitpro.resy = -999999.; rechitpro.resxMF = -999999.; 
@@ -992,18 +996,20 @@ void SiStripTrackingRecHitsValid::rechitanalysis_matched(TrajectoryStateOnSurfac
 
   const GeomDetUnit *monodet = gluedDet->monoDet(); 
   const GeomDetUnit *stereodet = gluedDet->stereoDet();
-  const StripGeomDetUnit *stripdet;
+  //We initialized it to monoHit case because it complains that it may be uninitialized
+  //and it will change value in the stereoHit case. The matched case do not use this
+  const StripGeomDetUnit *stripdet = (const StripGeomDetUnit *) (monodet) ; 
 
   const SiStripMatchedRecHit2D *matchedhit = dynamic_cast < const SiStripMatchedRecHit2D * >((*thit).hit());
   const SiStripRecHit2D *monohit;
   const SiStripRecHit2D *stereohit;
 
-  //If matchedmonorstereo is true we are dealing with monohit, false is for stereohit
-  if (matchedmonorstereo){
+  if (matchedmonorstereo == "monoHit"){
     auto hm = matchedhit->monoHit();
     monohit = &hm;
     stripdet = (const StripGeomDetUnit *) (monodet);
-  }  else if (!matchedmonorstereo){
+  } 
+  if (matchedmonorstereo == "stereoHit"){
     auto s = matchedhit->stereoHit();
     stereohit = &s;
     stripdet = (const StripGeomDetUnit *) (stereodet);
@@ -1014,19 +1020,22 @@ void SiStripTrackingRecHitsValid::rechitanalysis_matched(TrajectoryStateOnSurfac
   const StripTopology & topol = (const StripTopology &) stripdet->topology();
   const TrackingRecHit *rechit = (*thit).hit();
 
-  //We are in the matched hit case in both cases (mono or stereo). However, 
-  //when we want mono or stereo case from matched hit we change values. 
-  LocalPoint position=rechit->localPosition();
-  LocalError error=rechit->localPositionError();
+  LocalPoint position;
+  LocalError error;
   MeasurementPoint Mposition;
   MeasurementError Merror;
-  if(monohit){
+
+  if (matchedmonorstereo == "matched"){
+    position=rechit->localPosition();
+    error=rechit->localPositionError();
+  }
+  if(matchedmonorstereo == "monoHit"){
     position = monohit->localPosition();
     error = monohit->localPositionError();
     Mposition = topol.measurementPosition(position);
     Merror = topol.measurementError(position, error);
   } 
-  if(stereohit){
+  if (matchedmonorstereo == "stereoHit"){
     position = stereohit->localPosition();
     error = stereohit->localPositionError();
     Mposition = topol.measurementPosition(position);
@@ -1039,13 +1048,13 @@ void SiStripTrackingRecHitsValid::rechitanalysis_matched(TrajectoryStateOnSurfac
   LocalVector monotkdir = monodet->toLocal(gtrkdir);
   LocalVector stereotkdir = stereodet->toLocal(gtrkdir);
   
-  if(monohit){
+  if(matchedmonorstereo == "monoHit"){
     if (monotkdir.z() != 0) {
       rechitpro.trackangle = atan(monotkdir.x() / monotkdir.z()) * TMath::RadToDeg();
       rechitpro.trackanglebeta = atan(monotkdir.y() / monotkdir.z()) * TMath::RadToDeg();
     }
   }
-  if(stereohit){
+  if (matchedmonorstereo == "stereoHit"){
     if (stereotkdir.z() != 0) {
       rechitpro.trackangle = atan(stereotkdir.x() / stereotkdir.z()) * TMath::RadToDeg();
       rechitpro.trackanglebeta = atan(stereotkdir.y() / stereotkdir.z()) * TMath::RadToDeg();
@@ -1064,8 +1073,8 @@ void SiStripTrackingRecHitsValid::rechitanalysis_matched(TrajectoryStateOnSurfac
   rechitpro.expectedwidth = 1 + Sp - Sm;
 
   SiStripRecHit2D::ClusterRef clust;
-  if(monohit){clust = monohit->cluster();}
-  if(stereohit){clust = stereohit->cluster();}
+  if(matchedmonorstereo == "monoHit"){clust = monohit->cluster();}
+  if(matchedmonorstereo == "stereoHit"){clust = stereohit->cluster();}
 
   int clusiz=0;
   int totcharge=0;
@@ -1097,12 +1106,9 @@ void SiStripTrackingRecHitsValid::rechitanalysis_matched(TrajectoryStateOnSurfac
   }
   rechitpro.category = iopt;
 
-  matched.clear();
-  //We are in the matched hit case in both cases (mono or stereo). However, 
-  //when we want mono or stereo case from matched hit we clear the object. 
-  matched = associate.associateHit(*matchedhit);
-  if(monohit){matched.clear();matched = associate.associateHit(*monohit);}
-  if(stereohit){matched.clear();matched = associate.associateHit(*stereohit);}
+  if(matchedmonorstereo == "matched"){matched.clear();matched = associate.associateHit(*matchedhit);}
+  if(matchedmonorstereo == "monoHit"){matched.clear();matched = associate.associateHit(*monohit);}
+  if(matchedmonorstereo == "stereoHit"){matched.clear();matched = associate.associateHit(*stereohit);}
 
   double mindist = 999999;
   double dist = 999999;
@@ -1118,12 +1124,14 @@ void SiStripTrackingRecHitsValid::rechitanalysis_matched(TrajectoryStateOnSurfac
     
     for(vector<PSimHit>::const_iterator m=matched.begin(); m<matched.end(); m++){
       //project simhit;
-      hitPair= projectHit((*m),partnerstripdet,gluedDet->surface());
-      distx = fabs(rechitpro.x - hitPair.first.x());
-      disty = fabs(rechitpro.y - hitPair.first.y());
-      dist = sqrt(distx*distx+disty*disty);
-      if(monohit){dist = abs((monohit)->localPosition().x() - (*m).localPosition().x());}
-      if(stereohit){dist = abs((stereohit)->localPosition().x() - (*m).localPosition().x());}
+      if(matchedmonorstereo == "matched"){
+	hitPair= projectHit((*m),partnerstripdet,gluedDet->surface());
+	distx = fabs(rechitpro.x - hitPair.first.x());
+	disty = fabs(rechitpro.y - hitPair.first.y());
+	dist = sqrt(distx*distx+disty*disty);
+      }
+      if(matchedmonorstereo == "monoHit"){dist = abs((monohit)->localPosition().x() - (*m).localPosition().x());}
+      if(matchedmonorstereo == "stereoHit"){dist = abs((stereohit)->localPosition().x() - (*m).localPosition().x());}
 
       // std::cout << " Simhit position x = " << hitPair.first.x() 
       //      << " y = " << hitPair.first.y() << " dist = " << dist << std::endl;
@@ -1133,16 +1141,20 @@ void SiStripTrackingRecHitsValid::rechitanalysis_matched(TrajectoryStateOnSurfac
 	closest = (*m);
       }
     }  
-    rechitpro.resx = rechitpro.x - closestPair.first.x();
-    rechitpro.resy = rechitpro.y - closestPair.first.y();
-    rechitpro.pullx = ((rechit)->localPosition().x() - (closestPair.first.x())) / sqrt(error.xx());
-    rechitpro.pully = ((rechit)->localPosition().y() - (closestPair.first.y())) / sqrt(error.yy());
     
-    if(monohit || stereohit)
-    rechitpro.resx = rechitpro.x - closest.localPosition().x();
-    rechitpro.resxMF = Mposition.x() - (topol.measurementPosition(closest.localPosition())).x();
-    rechitpro.pullx = (rechit->localPosition().x() - (closest).localPosition().x()) / sqrt(error.xx());
-    rechitpro.pullxMF = (rechitpro.resxMF)/sqrt(Merror.uu());
+    if(matchedmonorstereo == "matched"){
+      rechitpro.resx = rechitpro.x - closestPair.first.x();
+      rechitpro.resy = rechitpro.y - closestPair.first.y();
+      rechitpro.pullx = ((rechit)->localPosition().x() - (closestPair.first.x())) / sqrt(error.xx());
+      rechitpro.pully = ((rechit)->localPosition().y() - (closestPair.first.y())) / sqrt(error.yy());
+    }
+    
+    if( (matchedmonorstereo == "monoHit") || (matchedmonorstereo == "stereoHit") ){
+      rechitpro.resx = rechitpro.x - closest.localPosition().x();
+      rechitpro.resxMF = Mposition.x() - (topol.measurementPosition(closest.localPosition())).x();
+      rechitpro.pullx = (rechit->localPosition().x() - (closest).localPosition().x()) / sqrt(error.xx());
+      rechitpro.pullxMF = (rechitpro.resxMF)/sqrt(Merror.uu());
+    }
 
   }
 }

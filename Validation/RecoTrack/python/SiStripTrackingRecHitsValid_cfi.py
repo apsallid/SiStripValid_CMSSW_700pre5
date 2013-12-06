@@ -131,7 +131,7 @@ StripTrackingRecHitsValid = cms.EDAnalyzer("SiStripTrackingRecHitsValid",
         xmax           = cms.double(4.0),
         ymin           = cms.double(0.),
         ymax           = cms.double(2.0),
-        layerswitchon  = cms.bool(True)
+        layerswitchon  = cms.bool(False)
     ),
 
     TProfResMFTrackwidthProfile_WClus2 = cms.PSet(
@@ -140,7 +140,7 @@ StripTrackingRecHitsValid = cms.EDAnalyzer("SiStripTrackingRecHitsValid",
         xmax           = cms.double(4.0),
         ymin           = cms.double(0.),
         ymax           = cms.double(2.0),
-        layerswitchon  = cms.bool(True)
+        layerswitchon  = cms.bool(False)
     ),
 
     TProfResMFTrackwidthProfile_WClus21 = cms.PSet(
@@ -149,7 +149,7 @@ StripTrackingRecHitsValid = cms.EDAnalyzer("SiStripTrackingRecHitsValid",
         xmax           = cms.double(4.0),
         ymin           = cms.double(-2.0),
         ymax           = cms.double(+2.0),
-        layerswitchon  = cms.bool(True)
+        layerswitchon  = cms.bool(False)
     ),
 
     TProfResMFTrackwidthProfile_WClus22 = cms.PSet(
@@ -158,7 +158,7 @@ StripTrackingRecHitsValid = cms.EDAnalyzer("SiStripTrackingRecHitsValid",
         xmax           = cms.double(4.0),
         ymin           = cms.double(-5.0),
         ymax           = cms.double(+5.0),
-        layerswitchon  = cms.bool(True)
+        layerswitchon  = cms.bool(False)
     ),
 
     TProfResMFTrackwidthProfile_WClus23 = cms.PSet(
@@ -167,7 +167,7 @@ StripTrackingRecHitsValid = cms.EDAnalyzer("SiStripTrackingRecHitsValid",
         xmax           = cms.double(4.0),
         ymin           = cms.double(-0.5),
         ymax           = cms.double(+0.5),
-        layerswitchon  = cms.bool(True)
+        layerswitchon  = cms.bool(False)
     ),
 
      TProfResMFTrackwidthProfile_WClus3 = cms.PSet(
@@ -176,7 +176,7 @@ StripTrackingRecHitsValid = cms.EDAnalyzer("SiStripTrackingRecHitsValid",
         xmax           = cms.double(4.0),
         ymin           = cms.double(0.),
         ymax           = cms.double(2.0),
-        layerswitchon  = cms.bool(True)
+        layerswitchon  = cms.bool(False)
     ),
 
     TProfResMFTrackwidthProfile_WClus4 = cms.PSet(
@@ -185,7 +185,7 @@ StripTrackingRecHitsValid = cms.EDAnalyzer("SiStripTrackingRecHitsValid",
         xmax           = cms.double(4.0),
         ymin           = cms.double(0.),
         ymax           = cms.double(2.0),
-        layerswitchon  = cms.bool(True)
+        layerswitchon  = cms.bool(False)
     ),
 
     TProfErrxMFTrackwidthProfile = cms.PSet(
@@ -203,7 +203,7 @@ StripTrackingRecHitsValid = cms.EDAnalyzer("SiStripTrackingRecHitsValid",
         xmax           = cms.double(4.0),
         ymin           = cms.double(-2.0),
         ymax           = cms.double(+2.0),
-        layerswitchon  = cms.bool(True)
+        layerswitchon  = cms.bool(False)
     ),
 
     TProfErrxMFTrackwidthProfile_Category2 = cms.PSet(
@@ -212,7 +212,7 @@ StripTrackingRecHitsValid = cms.EDAnalyzer("SiStripTrackingRecHitsValid",
         xmax           = cms.double(4.0),
         ymin           = cms.double(-2.0),
         ymax           = cms.double(+2.0),
-        layerswitchon  = cms.bool(True)
+        layerswitchon  = cms.bool(False)
     ),
 
     TProfErrxMFTrackwidthProfile_Category3 = cms.PSet(
@@ -221,7 +221,7 @@ StripTrackingRecHitsValid = cms.EDAnalyzer("SiStripTrackingRecHitsValid",
         xmax           = cms.double(4.0),
         ymin           = cms.double(-2.0),
         ymax           = cms.double(+2.0),
-        layerswitchon  = cms.bool(True)
+        layerswitchon  = cms.bool(False)
     ),
 
     TProfErrxMFTrackwidthProfile_Category4 = cms.PSet(
@@ -230,7 +230,7 @@ StripTrackingRecHitsValid = cms.EDAnalyzer("SiStripTrackingRecHitsValid",
         xmax           = cms.double(10.0),
         ymin           = cms.double(-2.0),
         ymax           = cms.double(+2.0),
-        layerswitchon  = cms.bool(True)
+        layerswitchon  = cms.bool(False)
     ),
 
     TProfErrxMFClusterwidthProfile_Category1 = cms.PSet(
@@ -239,7 +239,7 @@ StripTrackingRecHitsValid = cms.EDAnalyzer("SiStripTrackingRecHitsValid",
         xmax           = cms.double(10.),
         ymin           = cms.double(-2.0),
         ymax           = cms.double(+2.0),
-        layerswitchon  = cms.bool(True)
+        layerswitchon  = cms.bool(False)
     ),
 
     TProfErrxMFAngleProfile = cms.PSet(
@@ -276,7 +276,7 @@ StripTrackingRecHitsValid = cms.EDAnalyzer("SiStripTrackingRecHitsValid",
         Nbinx          = cms.int32(100),
         xmin           = cms.double(0.),
         xmax           = cms.double(0.005),
-        layerswitchon  = cms.bool(True)
+        layerswitchon  = cms.bool(False)
     ),
 
    TH1ErrxMFRphi = cms.PSet(
@@ -318,7 +318,7 @@ StripTrackingRecHitsValid = cms.EDAnalyzer("SiStripTrackingRecHitsValid",
         Nbinx          = cms.int32(100),
         xmin           = cms.double(-0.02),
         xmax           = cms.double(+0.02),
-        layerswitchon  = cms.bool(True)
+        layerswitchon  = cms.bool(False)
     ),
 
    TH1ResMFRphi = cms.PSet(
@@ -332,35 +332,35 @@ StripTrackingRecHitsValid = cms.EDAnalyzer("SiStripTrackingRecHitsValid",
         Nbinx          = cms.int32(100),
         xmin           = cms.double(-2.0),
         xmax           = cms.double(+2.0),
-        layerswitchon  = cms.bool(True)
+        layerswitchon  = cms.bool(False)
     ),
 
    TH1ResMFRphiwclus2 = cms.PSet(
         Nbinx          = cms.int32(100),
         xmin           = cms.double(-2.0),
         xmax           = cms.double(+2.0),
-        layerswitchon  = cms.bool(True)
+        layerswitchon  = cms.bool(False)
     ),
 
    TH1ResMFRphiwclus3 = cms.PSet(
         Nbinx          = cms.int32(100),
         xmin           = cms.double(-2.0),
         xmax           = cms.double(+2.0),
-        layerswitchon  = cms.bool(True)
+        layerswitchon  = cms.bool(False)
     ),
 
    TH1ResMFRphiwclus4 = cms.PSet(
         Nbinx          = cms.int32(100),
         xmin           = cms.double(-2.0),
         xmax           = cms.double(+2.0),
-        layerswitchon  = cms.bool(True)
+        layerswitchon  = cms.bool(False)
     ),
 
    TH1PullLFRphi = cms.PSet(
         Nbinx          = cms.int32(100),
         xmin           = cms.double(-5.0),
         xmax           = cms.double(+5.0),
-        layerswitchon  = cms.bool(True)
+        layerswitchon  = cms.bool(False)
     ),
 
    TH1PullMFRphi = cms.PSet(
@@ -374,49 +374,49 @@ StripTrackingRecHitsValid = cms.EDAnalyzer("SiStripTrackingRecHitsValid",
         Nbinx          = cms.int32(100),
         xmin           = cms.double(-2.0),
         xmax           = cms.double(+2.0),
-        layerswitchon  = cms.bool(True)
+        layerswitchon  = cms.bool(False)
     ),
 
    TH1PullMFRphiwclus2 = cms.PSet(
         Nbinx          = cms.int32(100),
         xmin           = cms.double(-2.0),
         xmax           = cms.double(+2.0),
-        layerswitchon  = cms.bool(True)
+        layerswitchon  = cms.bool(False)
     ),
 
    TH1PullMFRphiwclus3 = cms.PSet(
         Nbinx          = cms.int32(100),
         xmin           = cms.double(-2.0),
         xmax           = cms.double(+2.0),
-        layerswitchon  = cms.bool(True)
+        layerswitchon  = cms.bool(False)
     ),
 
    TH1PullMFRphiwclus4 = cms.PSet(
         Nbinx          = cms.int32(100),
         xmin           = cms.double(-2.0),
         xmax           = cms.double(+2.0),
-        layerswitchon  = cms.bool(True)
+        layerswitchon  = cms.bool(False)
     ),
 
    TH1TrackangleRphi = cms.PSet(
         Nbinx          = cms.int32(100),
         xmin           = cms.double(-20.0),
         xmax           = cms.double(+20.0),
-        layerswitchon  = cms.bool(True)
+        layerswitchon  = cms.bool(False)
     ),
 
    TH1TrackanglebetaRphi = cms.PSet(
         Nbinx          = cms.int32(100),
         xmin           = cms.double(-20.0),
         xmax           = cms.double(+20.0),
-        layerswitchon  = cms.bool(True)
+        layerswitchon  = cms.bool(False)
     ),
 
    TH1Trackangle2Rphi = cms.PSet(
         Nbinx          = cms.int32(100),
         xmin           = cms.double(-20.0),
         xmax           = cms.double(+20.0),
-        layerswitchon  = cms.bool(True)
+        layerswitchon  = cms.bool(False)
     ),
 
     TProfPullTrackangleProfileRphi = cms.PSet(
@@ -439,28 +439,28 @@ StripTrackingRecHitsValid = cms.EDAnalyzer("SiStripTrackingRecHitsValid",
         Nbinx          = cms.int32(100),
         xmin           = cms.double(0.),
         xmax           = cms.double(1.0),
-        layerswitchon  = cms.bool(True)
+        layerswitchon  = cms.bool(False)
     ),
 
    TH1ExpectedwidthRphi = cms.PSet(
         Nbinx          = cms.int32(10),
         xmin           = cms.double(0.),
         xmax           = cms.double(10.),
-        layerswitchon  = cms.bool(True)
+        layerswitchon  = cms.bool(False)
     ),
 
     TH1ClusterwidthRphi = cms.PSet(
         Nbinx          = cms.int32(10),
         xmin           = cms.double(0.),
         xmax           = cms.double(10.),
-        layerswitchon  = cms.bool(True)
+        layerswitchon  = cms.bool(False)
     ),
 
    TH1CategoryRphi = cms.PSet(
         Nbinx          = cms.int32(10),
         xmin           = cms.double(0.),
         xmax           = cms.double(10.),
-        layerswitchon  = cms.bool(True)
+        layerswitchon  = cms.bool(False)
     ),
 
    TProfPullTrackwidthProfileRphi = cms.PSet(
@@ -514,7 +514,7 @@ StripTrackingRecHitsValid = cms.EDAnalyzer("SiStripTrackingRecHitsValid",
         xmax           = cms.double(1.),
         ymin           = cms.double(-2.0),
         ymax           = cms.double(+2.0),
-        layerswitchon  = cms.bool(True)
+        layerswitchon  = cms.bool(False)
     ),
 
   TProfPullTrackwidthProfileCategory2Rphi = cms.PSet(
@@ -523,7 +523,7 @@ StripTrackingRecHitsValid = cms.EDAnalyzer("SiStripTrackingRecHitsValid",
         xmax           = cms.double(1.0),
         ymin           = cms.double(-2.0),
         ymax           = cms.double(+2.0),
-        layerswitchon  = cms.bool(True)
+        layerswitchon  = cms.bool(False)
     ),
 
   TProfPullTrackwidthProfileCategory3Rphi = cms.PSet(
@@ -532,7 +532,7 @@ StripTrackingRecHitsValid = cms.EDAnalyzer("SiStripTrackingRecHitsValid",
         xmax           = cms.double(1.0),
         ymin           = cms.double(-2.0),
         ymax           = cms.double(+2.0),
-        layerswitchon  = cms.bool(True)
+        layerswitchon  = cms.bool(False)
     ),
 
   TProfPullTrackwidthProfileCategory4Rphi = cms.PSet(
@@ -541,7 +541,7 @@ StripTrackingRecHitsValid = cms.EDAnalyzer("SiStripTrackingRecHitsValid",
         xmax           = cms.double(1.0),
         ymin           = cms.double(-2.0),
         ymax           = cms.double(+2.0),
-        layerswitchon  = cms.bool(True)
+        layerswitchon  = cms.bool(False)
     ),
 
   TProfErrxMFTrackwidthProfileRphi = cms.PSet(
@@ -595,7 +595,7 @@ StripTrackingRecHitsValid = cms.EDAnalyzer("SiStripTrackingRecHitsValid",
         xmax           = cms.double(4.0),
         ymin           = cms.double(-2.0),
         ymax           = cms.double(+2.0),
-        layerswitchon  = cms.bool(True)
+        layerswitchon  = cms.bool(False)
     ),
 
   TProfResMFTrackwidthProfileWclus2Rphi = cms.PSet(
@@ -604,7 +604,7 @@ StripTrackingRecHitsValid = cms.EDAnalyzer("SiStripTrackingRecHitsValid",
         xmax           = cms.double(4.0),
         ymin           = cms.double(-2.0),
         ymax           = cms.double(+2.0),
-        layerswitchon  = cms.bool(True)
+        layerswitchon  = cms.bool(False)
     ),
 
   TProfResMFTrackwidthProfileWclus3Rphi = cms.PSet(
@@ -613,7 +613,7 @@ StripTrackingRecHitsValid = cms.EDAnalyzer("SiStripTrackingRecHitsValid",
         xmax           = cms.double(4.0),
         ymin           = cms.double(-2.0),
         ymax           = cms.double(+2.0),
-        layerswitchon  = cms.bool(True)
+        layerswitchon  = cms.bool(False)
     ),
 
   TProfResMFTrackwidthProfileWclus4Rphi = cms.PSet(
@@ -622,7 +622,7 @@ StripTrackingRecHitsValid = cms.EDAnalyzer("SiStripTrackingRecHitsValid",
         xmax           = cms.double(4.0),
         ymin           = cms.double(-2.0),
         ymax           = cms.double(+2.0),
-        layerswitchon  = cms.bool(True)
+        layerswitchon  = cms.bool(False)
     ),
 
   TProfErrxMFTrackwidthProfileCategory1Rphi = cms.PSet(
@@ -631,7 +631,7 @@ StripTrackingRecHitsValid = cms.EDAnalyzer("SiStripTrackingRecHitsValid",
         xmax           = cms.double(4.0),
         ymin           = cms.double(-2.0),
         ymax           = cms.double(+2.0),
-        layerswitchon  = cms.bool(True)
+        layerswitchon  = cms.bool(False)
     ),
 
   TProfErrxMFTrackwidthProfileCategory2Rphi = cms.PSet(
@@ -640,7 +640,7 @@ StripTrackingRecHitsValid = cms.EDAnalyzer("SiStripTrackingRecHitsValid",
         xmax           = cms.double(4.0),
         ymin           = cms.double(-2.0),
         ymax           = cms.double(+2.0),
-        layerswitchon  = cms.bool(True)
+        layerswitchon  = cms.bool(False)
     ),
 
   TProfErrxMFTrackwidthProfileCategory3Rphi = cms.PSet(
@@ -649,7 +649,7 @@ StripTrackingRecHitsValid = cms.EDAnalyzer("SiStripTrackingRecHitsValid",
         xmax           = cms.double(4.0),
         ymin           = cms.double(-2.0),
         ymax           = cms.double(+2.0),
-        layerswitchon  = cms.bool(True)
+        layerswitchon  = cms.bool(False)
     ),
 
   TProfErrxMFTrackwidthProfileCategory4Rphi = cms.PSet(
@@ -658,7 +658,7 @@ StripTrackingRecHitsValid = cms.EDAnalyzer("SiStripTrackingRecHitsValid",
         xmax           = cms.double(4.0),
         ymin           = cms.double(-2.0),
         ymax           = cms.double(+2.0),
-        layerswitchon  = cms.bool(True)
+        layerswitchon  = cms.bool(False)
     ),
 
   TProfErrxMFAngleProfileRphi = cms.PSet(
@@ -676,7 +676,7 @@ StripTrackingRecHitsValid = cms.EDAnalyzer("SiStripTrackingRecHitsValid",
         xmax           = cms.double(10.),
         ymin           = cms.double(-2.0),
         ymax           = cms.double(+2.0),
-        layerswitchon  = cms.bool(True)
+        layerswitchon  = cms.bool(False)
     ),
 
   TProfrapidityResProfilewclus1 = cms.PSet(
@@ -685,7 +685,7 @@ StripTrackingRecHitsValid = cms.EDAnalyzer("SiStripTrackingRecHitsValid",
         xmax           = cms.double(+2.5),
         ymin           = cms.double(0.0),
         ymax           = cms.double(2.0),
-        layerswitchon  = cms.bool(True)
+        layerswitchon  = cms.bool(False)
     ),
 
   TProfrapidityResProfilewclus2 = cms.PSet(
@@ -694,7 +694,7 @@ StripTrackingRecHitsValid = cms.EDAnalyzer("SiStripTrackingRecHitsValid",
         xmax           = cms.double(+2.5),
         ymin           = cms.double(0.0),
         ymax           = cms.double(2.0),
-        layerswitchon  = cms.bool(True)
+        layerswitchon  = cms.bool(False)
     ),
 
   TProfrapidityResProfilewclus3 = cms.PSet(
@@ -703,7 +703,7 @@ StripTrackingRecHitsValid = cms.EDAnalyzer("SiStripTrackingRecHitsValid",
         xmax           = cms.double(+2.5),
         ymin           = cms.double(0.0),
         ymax           = cms.double(2.0),
-        layerswitchon  = cms.bool(True)
+        layerswitchon  = cms.bool(False)
     ),
 
   TProfrapidityResProfilewclus4 = cms.PSet(
@@ -712,7 +712,7 @@ StripTrackingRecHitsValid = cms.EDAnalyzer("SiStripTrackingRecHitsValid",
         xmax           = cms.double(+2.5),
         ymin           = cms.double(0.0),
         ymax           = cms.double(2.0),
-        layerswitchon  = cms.bool(True)
+        layerswitchon  = cms.bool(False)
     ),
 
   TH1NstpSas = cms.PSet(
@@ -740,7 +740,7 @@ StripTrackingRecHitsValid = cms.EDAnalyzer("SiStripTrackingRecHitsValid",
         Nbinx          = cms.int32(100),
         xmin           = cms.double(0.),
         xmax           = cms.double(0.005),
-        layerswitchon  = cms.bool(True)
+        layerswitchon  = cms.bool(False)
     ),
 
   TH1ErrxMFSas = cms.PSet(
@@ -754,7 +754,7 @@ StripTrackingRecHitsValid = cms.EDAnalyzer("SiStripTrackingRecHitsValid",
         Nbinx          = cms.int32(100),
         xmin           = cms.double(-0.02),
         xmax           = cms.double(+0.02),
-        layerswitchon  = cms.bool(True)
+        layerswitchon  = cms.bool(False)
     ),
 
   TH1ResMFSas = cms.PSet(
@@ -768,7 +768,7 @@ StripTrackingRecHitsValid = cms.EDAnalyzer("SiStripTrackingRecHitsValid",
         Nbinx          = cms.int32(100),
         xmin           = cms.double(-4.),
         xmax           = cms.double(+4.),
-        layerswitchon  = cms.bool(True)
+        layerswitchon  = cms.bool(False)
     ),
 
   TH1PullMFSas = cms.PSet(
@@ -782,14 +782,14 @@ StripTrackingRecHitsValid = cms.EDAnalyzer("SiStripTrackingRecHitsValid",
         Nbinx          = cms.int32(100),
         xmin           = cms.double(-40.),
         xmax           = cms.double(+40.),
-        layerswitchon  = cms.bool(True)
+        layerswitchon  = cms.bool(False)
     ),
 
   TH1TrackanglebetaSas = cms.PSet(
         Nbinx          = cms.int32(100),
         xmin           = cms.double(-40.),
         xmax           = cms.double(+40.),
-        layerswitchon  = cms.bool(True)
+        layerswitchon  = cms.bool(False)
     ),
 
   TProfPullTrackangleProfileSas = cms.PSet(
@@ -805,28 +805,28 @@ StripTrackingRecHitsValid = cms.EDAnalyzer("SiStripTrackingRecHitsValid",
         Nbinx          = cms.int32(100),
         xmin           = cms.double(0.),
         xmax           = cms.double(1.),
-        layerswitchon  = cms.bool(True)
+        layerswitchon  = cms.bool(False)
     ),
 
   TH1ExpectedwidthSas = cms.PSet(
         Nbinx          = cms.int32(10),
         xmin           = cms.double(0.),
         xmax           = cms.double(10.),
-        layerswitchon  = cms.bool(True)
+        layerswitchon  = cms.bool(False)
     ),
 
   TH1ClusterwidthSas = cms.PSet(
         Nbinx          = cms.int32(10),
         xmin           = cms.double(0.),
         xmax           = cms.double(10.),
-        layerswitchon  = cms.bool(True)
+        layerswitchon  = cms.bool(False)
     ),
 
   TH1CategorySas = cms.PSet(
         Nbinx          = cms.int32(10),
         xmin           = cms.double(0.),
         xmax           = cms.double(10.),
-        layerswitchon  = cms.bool(True)
+        layerswitchon  = cms.bool(False)
     ),
 
   TProfPullTrackwidthProfileSas = cms.PSet(
@@ -844,7 +844,7 @@ StripTrackingRecHitsValid = cms.EDAnalyzer("SiStripTrackingRecHitsValid",
         xmax           = cms.double(1.),
         ymin           = cms.double(-2.),
         ymax           = cms.double(+2.),
-        layerswitchon  = cms.bool(True)
+        layerswitchon  = cms.bool(False)
     ),
 
   TProfPullTrackwidthProfileCategory2Sas = cms.PSet(
@@ -853,7 +853,7 @@ StripTrackingRecHitsValid = cms.EDAnalyzer("SiStripTrackingRecHitsValid",
         xmax           = cms.double(1.),
         ymin           = cms.double(-2.),
         ymax           = cms.double(+2.),
-        layerswitchon  = cms.bool(True)
+        layerswitchon  = cms.bool(False)
     ),
 
   TProfPullTrackwidthProfileCategory3Sas = cms.PSet(
@@ -862,7 +862,7 @@ StripTrackingRecHitsValid = cms.EDAnalyzer("SiStripTrackingRecHitsValid",
         xmax           = cms.double(1.),
         ymin           = cms.double(-2.),
         ymax           = cms.double(+2.),
-        layerswitchon  = cms.bool(True)
+        layerswitchon  = cms.bool(False)
     ),
 
   TProfPullTrackwidthProfileCategory4Sas = cms.PSet(
@@ -871,7 +871,7 @@ StripTrackingRecHitsValid = cms.EDAnalyzer("SiStripTrackingRecHitsValid",
         xmax           = cms.double(1.),
         ymin           = cms.double(-2.),
         ymax           = cms.double(+2.),
-        layerswitchon  = cms.bool(True)
+        layerswitchon  = cms.bool(False)
     ),
 
   TProfErrxMFTrackwidthProfileSas = cms.PSet(
@@ -889,7 +889,7 @@ StripTrackingRecHitsValid = cms.EDAnalyzer("SiStripTrackingRecHitsValid",
         xmax           = cms.double(4.),
         ymin           = cms.double(-2.),
         ymax           = cms.double(+2.),
-        layerswitchon  = cms.bool(True)
+        layerswitchon  = cms.bool(False)
     ),
 
   TProfErrxMFTrackwidthProfileCategory2Sas = cms.PSet(
@@ -898,7 +898,7 @@ StripTrackingRecHitsValid = cms.EDAnalyzer("SiStripTrackingRecHitsValid",
         xmax           = cms.double(4.),
         ymin           = cms.double(-2.),
         ymax           = cms.double(+2.),
-        layerswitchon  = cms.bool(True)
+        layerswitchon  = cms.bool(False)
     ),
 
   TProfErrxMFTrackwidthProfileCategory3Sas = cms.PSet(
@@ -907,7 +907,7 @@ StripTrackingRecHitsValid = cms.EDAnalyzer("SiStripTrackingRecHitsValid",
         xmax           = cms.double(4.),
         ymin           = cms.double(-2.),
         ymax           = cms.double(+2.),
-        layerswitchon  = cms.bool(True)
+        layerswitchon  = cms.bool(False)
     ),
 
   TProfErrxMFTrackwidthProfileCategory4Sas = cms.PSet(
@@ -916,7 +916,7 @@ StripTrackingRecHitsValid = cms.EDAnalyzer("SiStripTrackingRecHitsValid",
         xmax           = cms.double(4.),
         ymin           = cms.double(-2.),
         ymax           = cms.double(+2.),
-        layerswitchon  = cms.bool(True)
+        layerswitchon  = cms.bool(False)
     ),
 
   TProfErrxMFAngleProfileSas = cms.PSet(
@@ -934,7 +934,7 @@ StripTrackingRecHitsValid = cms.EDAnalyzer("SiStripTrackingRecHitsValid",
         xmax           = cms.double(10.),
         ymin           = cms.double(-2.),
         ymax           = cms.double(+2.),
-        layerswitchon  = cms.bool(True)
+        layerswitchon  = cms.bool(False)
     ),
 
   TH1PosxMatched = cms.PSet(
